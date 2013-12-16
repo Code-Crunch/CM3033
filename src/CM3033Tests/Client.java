@@ -18,121 +18,140 @@ import javax.swing.JOptionPane;
  * @author samc
  */
 public class Client implements Runnable {
+    ////////////////////////////
+    //////   VARIABLES   ///////
+    ////////////////////////////
 
+    // Stores the communication Socket 
     Socket requestSocket;
+    // Stores the stream to write to
     PrintWriter out;
+    // Stores the stream to read from
     BufferedReader in;
-
-    //ClientApp ca;
+    // Stores the default value for the sending String
     String sendStr = "MaxMin:null";
-    String oldSendStr = sendStr;
-    int test = 0;
+    // Stores the string to check if the value should be sent
+    String oldSendStr = "";
+    // Stores the variable to store if messages have been recieved by the server
+    int messageCount = 0;
+    // Stores the frame for producing messages
     Component frame = null;
-    String oldMaxMin = "";
+    // A blank variable to confirm the maxmin value was recieved
+    String maxMin = "";
+    // A variable to store the sahred data
+    volatile Test1 shared;
 
-    volatile Test1 t1;
-
+    ////////////////////////////
+    //////  CONSTRUCTOR  ///////
+    ////////////////////////////
     public Client(Test1 t2) {
-        t1 = t2;
-    }
-
-    public static void main(String args[]) throws IOException {
-        //Client client = new Client();
-        //client.run();
+        // Set the local shared data to the passed shared Data.
+        shared = t2;
     }
 
     @Override
     public void run() {
-        while (t1.isRunning()) {
+        // While running
+        while (shared.isRunning()) {
+            // Catch if the connection fails
             try {
-                //ca.updateTime();
-                //System.out.println(t1.isConnect());
-                if (t1.isConnect()) {
-                    if (!t1.isConnected()) {
-                        System.out.println(3);
-                        System.out.println("1test=" + test);
+                // If a connection is required
+                if (shared.isConnect()) {
+                    // If not already connected
+                    if (!shared.isConnected()) {
+                        // Set IP to the IP passed form dialog.
                         String ip = JOptionPane.showInputDialog("input ip address");
+                        // If the user input is not null.
                         if (ip != null) {
-                            System.out.println(4);
-                            //ca.alterText("Connecting...");
+                            // Set the new Socket
                             requestSocket = new Socket(ip, 8189);
+                            // Print connection details
                             System.out.println("Client>Connected to "
                                     + requestSocket.getLocalAddress().getHostName()
                                     + " on port " + requestSocket.getLocalPort());
+                            // configure the out stream
                             out = new PrintWriter(requestSocket.getOutputStream(), true /* auto flush */);
+                            // configure the in stream
                             in = new BufferedReader(new InputStreamReader(requestSocket.getInputStream()));
-                            t1.setConnected(true);
-                            //ca.alterText("Connected to " + requestSocket.getLocalAddress().getHostName()
-                            //        + " on port " + requestSocket.getLocalPort());
-                            //sendStr = "MaxMin:" + t1.getMaxMin();
-                            //sendMessage(sendStr);
-                            //oldSendStr = sendStr;
-                            //test = 0;
-                            test++;
+                            // set the shared connected to true. 
+                            shared.setConnected(true);
+                            // Add to the message count (Becuase confirmation of connection from the server)
+                            messageCount++;
 
+                            // If the in stream is ready
                             if (in.ready()) {
-                                System.out.println(5);
-                                //t1.setMaxMin(in.readLine());
-                                if (t1.getMaxMin() != null) {
-                                    System.out.println(6);
-                                    System.out.println("Server>" + t1.getMaxMin());
-                                    test++;
-                                    System.out.println("2test=" + test);
+                                // If shared MaxMin is not null
+                                if (shared.getMaxMin() != null) {
+                                    // Print the returned message from the server
+                                    System.out.println("Server>" + in.readLine());
+                                    // Add to the message count
+                                    messageCount++;
                                 } else {
-                                    System.out.println(7);
-                                    t1.setMaxMin(oldMaxMin);
+                                    // Set the shared max min for some reason???
+                                    shared.setMaxMin(maxMin);
                                 }
                             }
-
-                            sendStr = "MaxMin:" + t1.getMaxMin();
+                            // Set the max min to th shared maxmin
+                            sendStr = "MaxMin:" + shared.getMaxMin();
+                            // If the send has been updated 
                             if (!sendStr.equals(oldSendStr)) {
-                                System.out.println(8);
+                                // Send the message
                                 sendMessage(sendStr);
+                                // Set the sent message record
                                 oldSendStr = sendStr;
-                                test--;
-                                System.out.println("3test=" + test);
+                                // Take 1 from message count as one has been sent
+                                messageCount--;
 
-                                if (test < 0) {
-                                    System.out.println(9);
-                                    System.out.println("4test=" + test);
+                                // If the message count is greater than < 0
+                                if (messageCount < 0) {
+                                    // send a confirmation message to disconnect
                                     sendMessage("BYE");
-                                    t1.setConnected(false);
-                                    if (t1.isRunning()) {
-                                        System.out.println(10);
-                                        //ca.alterText("Server Timeout!");
+                                    // Set shared connected to false
+                                    shared.setConnected(false);
+                                    // If the shared is running
+                                    if (shared.isRunning()) {
+                                        // Print the server timeout
+                                        System.out.println("Server Timeout!");
                                     } else {
-                                        System.out.println(11);
+                                        // stop the system
                                         System.exit(0);
                                     }
                                 }
                             }
                         } else {
-                            System.out.println(12);
-                            t1.setConnect(false);
-                            t1.setConnected(false);
+                            // set shared connect and connected to false
+                            shared.setConnect(false);
+                            shared.setConnected(false);
+                            // Show Dialog
                             JOptionPane.showMessageDialog(frame, "Please enter a valid IP.");
                         }
                     }
-                } else if (t1.isConnected()) {
-                    System.out.println(13);
+                    // If shared is connected
+                } else if (shared.isConnected()) {
+                    // Print disconnecting
                     System.out.println("Disconnecting");
+                    // Send bye to disconnect from server
                     sendMessage("BYE");
-                    //ca.alterText("Disconnected");
-                    t1.setConnected(false);
+                    // Set connected to false
+                    shared.setConnected(false);
                 }
             } catch (IOException ex) {
+                // Print the error message
                 System.out.println(ex.toString());
-                t1.setConnect(false);
-                System.out.println("OOHGAHBOOGAH");
+                // Set shared connect to false
+                shared.setConnect(false);
+                // Show dialog connection failed
                 JOptionPane.showMessageDialog(frame, "Connection Failed");
-                //ca.alterText("Connection Failed");
-                t1.setConnected(true);
+                // Not sure why this?
+                shared.setConnected(true);
             }
         }
     }
 
     private void sendMessage(String msg) {
+        // Send the message
         out.println(msg);
+        // Print the message
         System.out.println("Client>" + msg);
     }
 }
