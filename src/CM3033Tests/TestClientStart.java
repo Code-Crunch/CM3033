@@ -19,6 +19,7 @@ public class TestClientStart {
         Thread client = new Thread(new Client(t1));
         Thread clientGUI = new Thread(new ClientApp(t1));
 
+        
         clientGUI.start();
         client.start();
     }

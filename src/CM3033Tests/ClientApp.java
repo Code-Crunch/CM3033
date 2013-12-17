@@ -374,5 +374,8 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     @Override
     public void run() {
         setVisible(true);
+        while (t1.isRunning()) {
+            updateTime();
+        }
     }
 }
