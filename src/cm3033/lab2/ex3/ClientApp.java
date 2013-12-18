@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author Florin
  */
+
 public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     public volatile String text;
