@@ -287,11 +287,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_exitActionPerformed
 
     private void conectionsLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectionsLeftActionPerformed
-        hb.isAutomatic();
-        if (!hb.isAlive()) {
-            hb.start();
-        }
-        alterText("" + hb.autoBPM);
+
     }//GEN-LAST:event_conectionsLeftActionPerformed
 
     private void resetMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetMenuActionPerformed
