@@ -6,15 +6,13 @@
 package cm3033.lab2.ex3;
 
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Florin Mazilu 1114040
  */
-public class HeartBeat extends Thread {
+public class HeartBeat {
 //create a random for the BPM
 
     private Random r;
@@ -67,13 +65,5 @@ public class HeartBeat extends Thread {
         return temp;
     }
 
-    @Override
-    public void run() {
-        try {
-            autoBPM = getRandom();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(HeartBeat.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+   
 }
