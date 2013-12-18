@@ -29,7 +29,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     Calendar now = null, start = Calendar.getInstance();
     boolean running = true;
     boolean connect = false;
-    Alarm a = new Alarm();
+    Alarm a;
     HeartBeat hb = new HeartBeat(highValue);
 
     public ClientApp() throws IOException {
@@ -59,7 +59,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         minValue.addItem(140);
         minValue.addItem(160);
         minValue.addItem(180);
-
+        a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
     }
 
     /**

@@ -47,6 +47,7 @@ public class Client implements Runnable {
             while (ca.running) {
                 try {
                     ca.updateTime();
+                    
                     if (ca.connect) {
                         if (!connected) {
                             String ip = JOptionPane.showInputDialog("input ip address");
