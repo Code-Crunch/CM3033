@@ -27,6 +27,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     Calendar now = null, start = Calendar.getInstance();
     boolean running = true;
     boolean connect = false;
+    Alarm a = new Alarm();
 
     public ClientApp() throws IOException {
         initComponents();
