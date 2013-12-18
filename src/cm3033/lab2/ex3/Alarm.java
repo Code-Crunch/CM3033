@@ -55,6 +55,7 @@ public class Alarm {
             ishigh = true;
         } //check if it's to low
         else if (bpm < low) {
+            ishigh = false;
             activate();
         } else {
             deactivate();
