@@ -31,6 +31,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     boolean connect = false;
     Alarm a;
     HeartBeat hb = new HeartBeat(highValue);
+    int heartbeatValue;
 
     public ClientApp() throws IOException {
         initComponents();
@@ -316,10 +317,10 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
             a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
             //create a random bpm based on the user input
-            int placeHolder = hb.getRandom();
-            updateBpm(String.valueOf(placeHolder));
+            heartbeatValue = hb.getRandom();
+            updateBpm(String.valueOf(bpmValue));
             //check with the alarm if the value is between the high and low
-            a.check(placeHolder);
+            a.check(heartbeatValue);
         } catch (InterruptedException ex) {
             Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -397,6 +398,10 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     public void updateBpm(String bpm) {
         bpmValue.setText(bpm);
+    }
+
+    public int getHb() {
+        return heartbeatValue;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bpmLabel;
