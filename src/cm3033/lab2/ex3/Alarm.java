@@ -5,6 +5,8 @@
  */
 package cm3033.lab2.ex3;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Florin
@@ -13,9 +15,11 @@ public class Alarm {
 
     int low, high;
     boolean isActive;
+    boolean ishigh;
 
     public Alarm(int low, int high) {
         isActive = false;
+        ishigh = false;
         this.low = low;
         this.high = high;
     }
@@ -35,9 +39,17 @@ public class Alarm {
     public void check(int bpm) {
         if (bpm > high) {
             activate();
+            ishigh = true;
         } else if (bpm < low) {
             activate();
         } else if (!active()) {
+            deactivate();
+        }
+        if (active() && ishigh) {
+            JOptionPane.showMessageDialog(null, "ALERT: HEART BEAT TOO HIGH");
+            deactivate();
+        } else if (active() && !ishigh) {
+            JOptionPane.showMessageDialog(null, "ALERT: HEART BEAT TOO LOW");
             deactivate();
         }
     }
