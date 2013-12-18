@@ -48,21 +48,22 @@ public class HeartBeat {
             String check3 = "[0-9]{0,9}[0-9]";
             while (!isValid) {
                 String str = JOptionPane.showInputDialog("Insert Next Heart Beat value(only numbers between 1-300)");
-                if (str.matches(check1) || str.matches(check2) || str.matches(check3)) {
-                    temp = Integer.parseInt(str) + r.nextInt(10);
-                    //check for the values to be between 0-300 as there will never be a bpm that high
-                    if (temp > 0 && temp < 300) {
-                        isValid = true;
+                if (str != null) {
+                    if (str.matches(check1) || str.matches(check2) || str.matches(check3)) {
+                        temp = Integer.parseInt(str) + r.nextInt(10);
+                        //check for the values to be between 0-300 as there will never be a bpm that high
+                        if (temp > 0 && temp < 300) {
+                            isValid = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Please only use values lower than 300");
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Please only use values lower than 300");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please only use numerical values");
+                        JOptionPane.showMessageDialog(null, "Please only use numerical values");
 
+                    }
                 }
             }
         }
         return temp;
     }
-
 }
