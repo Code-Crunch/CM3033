@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author Florin
  */
 public class ClientApp extends javax.swing.JFrame implements Runnable {
-    
+
     public volatile String text;
     private int highValue, lowValue;
     private int oldHighValue = highValue, oldLowValue = lowValue;
@@ -31,7 +31,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     boolean connect = false;
     Alarm a;
     HeartBeat hb = new HeartBeat(highValue);
-    
+
     public ClientApp() throws IOException {
         initComponents();
 
@@ -39,7 +39,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         text = "";
         maxValue.removeAllItems();
         minValue.removeAllItems();
-        
+
         maxValue.addItem(40);
         maxValue.addItem(60);
         maxValue.addItem(80);
@@ -49,7 +49,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         maxValue.addItem(160);
         maxValue.addItem(180);
         maxValue.addItem(200);
-        
+
         minValue.addItem(20);
         minValue.addItem(40);
         minValue.addItem(60);
@@ -298,7 +298,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         } else {
             setConnection(!connect);
         }
-        
+
 
     }//GEN-LAST:event_connectionButtonActionPerformed
 
@@ -320,15 +320,20 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         } catch (InterruptedException ex) {
             Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (a.alarm != null) {
+            alterText(a.info());
+            a.alarm = null;
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     public void updateTime() {
         now = Calendar.getInstance();
         Date time = now.getTime();
         currentTimeValue.setText(dateFormat.format(time));
         elapsedTimeValue.setText(dateFormat.format((time.getTime() - start.getTimeInMillis() - 3600000)));
     }
-    
+
     private void testDropDowns(String v) {
         if (maxValue.getSelectedItem() != null && maxValue.getSelectedItem().toString() != null) {
             if (minValue.getSelectedItem() != null && minValue.getSelectedItem().toString() != null) {
@@ -359,11 +364,11 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             }
         }
     }
-    
+
     public String getMaxMin() {
         return highLowValue;
     }
-    
+
     public void setConnection(boolean connected) {
         if (connected) {
             connect = true;
@@ -379,12 +384,12 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             minValue.setEnabled(true);
         }
     }
-    
+
     public void alterText(String text) {
         now = Calendar.getInstance();
         textSpace.append(dateFormat.format(now.getTime()) + " | " + text + "\n");
     }
-    
+
     public void updateBpm(String bpm) {
         bpmValue.setText(bpm);
     }
