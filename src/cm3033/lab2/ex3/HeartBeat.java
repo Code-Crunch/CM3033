@@ -6,13 +6,14 @@
 package cm3033.lab2.ex3;
 
 import java.util.Random;
+import java.util.Timer;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Florin
  */
-public class HeartBeat {
+public class HeartBeat extends Timer {
 
     private Random r;
     int max;
@@ -27,12 +28,14 @@ public class HeartBeat {
         automatic = true;
     }
 
-    public int getRandom() {
+
+
+    public int getRandom() throws InterruptedException {
         int temp;
         if (automatic) {
             temp = r.nextInt(max);
         } else {
-            temp = Integer.parseInt(JOptionPane.showInputDialog("Insert Next Heart Beat value"))+r.nextInt(10);
+            temp = Integer.parseInt(JOptionPane.showInputDialog("Insert Next Heart Beat value")) + r.nextInt(10);
         }
         return temp;
     }

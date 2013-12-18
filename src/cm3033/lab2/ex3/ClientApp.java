@@ -28,6 +28,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     boolean running = true;
     boolean connect = false;
     Alarm a = new Alarm();
+    HeartBeat hb = new HeartBeat(highValue);
 
     public ClientApp() throws IOException {
         initComponents();
