@@ -318,7 +318,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
             //create a random bpm based on the user input
             heartbeatValue = hb.getRandom();
-            updateBpm(String.valueOf(bpmValue));
+            updateBpm(String.valueOf(heartbeatValue));
             //check with the alarm if the value is between the high and low
             a.check(heartbeatValue);
         } catch (InterruptedException ex) {
