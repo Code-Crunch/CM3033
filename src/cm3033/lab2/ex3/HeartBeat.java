@@ -7,6 +7,10 @@ package cm3033.lab2.ex3;
 
 import java.util.Random;
 import javax.swing.JOptionPane;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -17,13 +21,17 @@ public class HeartBeat {
 
     private Random r;
     //set a max value that the BPM can be 
-    int max;
+    private int max;
     //returns the automatic bpm
-    int autoBPM;
-    //boolean that decides if the bpm should be user inputted or automatic
-    boolean automatic = false;
-//constructor
+    private int autoBPM;
 
+    //boolean that decides if the bpm should be user inputted or automatic
+    private boolean automatic = false;
+    //gen date time for logging when a BPM is automaticly generated
+    private final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private Calendar start = null;
+
+    //constructor
     public HeartBeat(int max) {
         r = new Random();
         this.max = max;
@@ -33,9 +41,17 @@ public class HeartBeat {
     public void isAutomatic() {
         automatic = true;
     }
+
+    public String genTime(int rand) throws InterruptedException {
+        start = Calendar.getInstance();
+        Date time = start.getTime();
+        String str = "BPM generated : " + rand + ", generated at :" + dateFormat.format(time);
+        return str;
+    }
 //generate a random integer between 0 and the max value
 
     public int getRandom() throws InterruptedException {
+        //generate a temp value for the random;
         int temp = 0;
         if (automatic) {
             temp = r.nextInt(max);
@@ -66,4 +82,5 @@ public class HeartBeat {
         }
         return temp;
     }
+
 }
