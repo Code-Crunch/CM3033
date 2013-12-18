@@ -349,7 +349,9 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         textSpace.append(dateFormat.format(now.getTime()) + " | " + text + "\n");
     }
 
-
+public void updateBpm(String bpm){
+bpmValue.setText(bpm);
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bpmLabel;
     private javax.swing.JLabel bpmValue;

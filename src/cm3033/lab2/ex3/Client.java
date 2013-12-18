@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -65,7 +67,7 @@ public class Client implements Runnable {
                                 oldSendStr = sendStr;
                                 test = 0;
                                 test--;
-
+                                ca.updateBpm(String.valueOf(ca.hb.getRandom()));
                                 if (in.ready()) {
                                     recievedStr = in.readLine();
                                     if (recievedStr != null) {
@@ -112,6 +114,8 @@ public class Client implements Runnable {
                     JOptionPane.showMessageDialog(frame, "Connection Failed");
                     ca.alterText("Connection Failed");
                     ca.setConnection(false);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } catch (IOException ex) {
