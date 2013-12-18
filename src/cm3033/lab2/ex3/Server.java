@@ -17,15 +17,19 @@ import java.net.Socket;
 public class Server implements Runnable {
 
     private Socket incoming;
+    ServerApp sv;
 
-    public Server(Socket incoming) {
+    public Server(Socket incoming, ServerApp sv) {
         this.incoming = incoming;
+        this.sv = sv;
+        sv.setVisible(true);
     }
 
     @Override
     public void run() {
         try {
-      // set up streams for bidirectional transfer
+            String s;
+            // set up streams for bidirectional transfer
             // across connection socket 
             BufferedReader in = new BufferedReader(new InputStreamReader(incoming.getInputStream()));
             PrintWriter out = new PrintWriter(incoming.getOutputStream(), true /* auto flush */);
@@ -35,6 +39,8 @@ public class Server implements Runnable {
             );
             out.println("Type BYE to quit");
             System.out.println(incoming.getLocalAddress().getHostName() + " Connected");
+            s = incoming.getLocalAddress().getHostName() + " Connected" + "\n";
+            sv.appendText(s);
             boolean done = false;
             while (!done) {
                 String str = in.readLine();
@@ -44,6 +50,8 @@ public class Server implements Runnable {
                     out.println("Recieved: " + str);
                     if (str.trim().equals("BYE")) {
                         System.out.println(incoming.getLocalAddress().getHostName() + " Disconnected");
+                        s = incoming.getLocalAddress().getHostName() + " Disconnected" + "\n";
+                        sv.appendText(s);
                         done = true;
                     }
                 }
