@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Florin
+ * @author Florin Mazilu 1114040
  */
 public class HeartBeat extends Timer {
 //create a random for the BPM

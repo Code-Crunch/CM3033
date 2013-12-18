@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Florin
+ * @author Florin Mazilu 1114040
  */
 //alarm class
 public class Alarm {

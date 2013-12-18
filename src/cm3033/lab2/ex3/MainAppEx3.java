@@ -20,6 +20,7 @@ public class MainAppEx3 {
     public static void main(String[] args) {
         int tpSize = 5;
         ServerApp sv = new ServerApp();
+        sv.setVisible(true);
         ThreadPoolExecutor pool = new ThreadPoolExecutor(
                 tpSize,
                 tpSize,
