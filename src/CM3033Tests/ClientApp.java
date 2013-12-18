@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CM3033Tests;
 
 import java.awt.Component;
@@ -15,30 +10,42 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Florin
+ * @author Sam Cusson 1006286
  */
 public class ClientApp extends javax.swing.JFrame implements Runnable {
 
+    ////////////////////////////
+    //////   VARIABLES   ///////
+    ////////////////////////////
+    
+    // variable to store the maxLimit and minLimit
     private int highValue, lowValue;
+    // variables to store the oldMaxLimit and oldMinLimit
     private int oldHighValue = highValue, oldLowValue = lowValue;
-    //private String maxMin;
+    // A date format template
     final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    // A calander to store the time of now and the time the application was started
     Calendar now = null, start = Calendar.getInstance();
-
-    Test1 t1;
-
-    //public volatile boolean running;
-    //public volatile boolean connect;
-    //public volatile boolean connected;
-    //public volatile String maxMin = "";
-    public ClientApp(Test1 t2) throws IOException {
+    // Variable to store the Shared Data class
+    DataShare dataShare;
+    
+    
+    ////////////////////////////
+    //////  CONSTRUCTOR  ///////
+    ////////////////////////////
+    
+    public ClientApp(DataShare ds2) throws IOException {
+        // Initialise the components
         initComponents();
+        
+        // set the data share to that passed to this class
+        dataShare = ds2;
 
-        t1 = t2;
-
+        // Reset the max and min value dropdowns
         maxValue.removeAllItems();
         minValue.removeAllItems();
 
+        // Add the options to the max/min
         maxValue.addItem(40);
         maxValue.addItem(60);
         maxValue.addItem(80);
@@ -48,7 +55,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         maxValue.addItem(160);
         maxValue.addItem(180);
         maxValue.addItem(200);
-
         minValue.addItem(20);
         minValue.addItem(40);
         minValue.addItem(60);
@@ -257,7 +263,8 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        t1.setRunning(false);
+        // Set the shared running to false
+        dataShare.setRunning(false);
     }//GEN-LAST:event_exitActionPerformed
 
     private void conectionsLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectionsLeftActionPerformed
@@ -265,83 +272,120 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_conectionsLeftActionPerformed
 
     private void resetMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetMenuActionPerformed
+        // reset the text Space
         textSpace.setText(null);
     }//GEN-LAST:event_resetMenuActionPerformed
 
     private void connectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectionButtonActionPerformed
-        if (!t1.isConnect()) {
-            t1.setConnect(!t1.isConnect());
-            setConnection(!t1.isConnect());
+        // If the system is not connected
+        if (!dataShare.isConnect()) {
+            // set the data share to atempt to connect
+            dataShare.setConnect(!dataShare.isConnect());
+            // Set the connection
+            setConnection(!dataShare.isConnect());
+            // Show the values that have been set in the text area.
             alterText("Min set to: " + lowValue + "\tMax set to: " + highValue);
         } else {
-            t1.setConnect(!t1.isConnect());
-            setConnection(!t1.isConnect());
+            // set shared data to disconncet
+            dataShare.setConnect(!dataShare.isConnect());
+            // Set the connection to that value
+            setConnection(!dataShare.isConnect());
         }
 
 
     }//GEN-LAST:event_connectionButtonActionPerformed
 
     private void minValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minValueActionPerformed
+        // Test the dropdown vairables with min
         testDropDowns("min");
     }//GEN-LAST:event_minValueActionPerformed
 
     private void maxValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxValueActionPerformed
+        // Test the dropdown variables with the max
         testDropDowns("max");
     }//GEN-LAST:event_maxValueActionPerformed
 
+    // A method to update the time
     public void updateTime() {
+        // set the now calander
         now = Calendar.getInstance();
+        // get the time from the now calander
         Date time = now.getTime();
+        // Set the time label to the selected time
         currentTimeValue.setText(dateFormat.format(time));
+        // Set the elapsed variable to the current time minus the start time.
         elapsedTimeValue.setText(dateFormat.format((time.getTime() - start.getTimeInMillis() - 3600000)));
     }
 
+    // The method to test dropdowns
     private void testDropDowns(String v) {
+        // if both max values and max strings have been initiated
         if (maxValue.getSelectedItem() != null && maxValue.getSelectedItem().toString() != null) {
+            // if both max values and max strings have been initiated
             if (minValue.getSelectedItem() != null && minValue.getSelectedItem().toString() != null) {
+                // Set highvalue to the value from the relative drop down
                 highValue = Integer.parseInt(maxValue.getSelectedItem().toString());
+                // Set highvalue to the value from the relative drop down
                 lowValue = Integer.parseInt(minValue.getSelectedItem().toString());
+                // If the high value is lower or equal to the min
                 if (highValue <= lowValue) {
                     switch (v) {
                         case "max":
+                            // If max, set the max to the old value
                             maxValue.setSelectedItem(oldHighValue);
+                            // break
                             break;
                         case "min":
+                            // if min, set the min to the old value
                             minValue.setSelectedItem(oldLowValue);
+                            // break
                             break;
                     }
+                    // Create a frame to display the error message
                     Component frame = null;
+                    // Show the error for the dropdown
                     JOptionPane.showMessageDialog(frame, "The \"Max Value\" must be more than the \"Min Value\"!");
                 } else {
+                    // Else valid change
                     switch (v) {
                         case "max":
+                            // set the oldMax to the new max
                             oldHighValue = highValue;
                         case "min":
+                            // set the oldMin to the new min
                             oldLowValue = lowValue;
                     }
-                    t1.setMaxMin(highValue + "," + lowValue);
+                    // Set the data share maxmin to the relevant value
+                    dataShare.setMaxMin(highValue + "," + lowValue);
                 }
             }
         }
     }
 
+    // A method to the configure if the client is connected or not. 
     public void setConnection(boolean connected) {
         if (!connected) {
-            //connect = true;
+            // If connected, disable the dropdowns
             maxValue.setEnabled(false);
             minValue.setEnabled(false);
+            // Set the mode lable to remote
             opModeValue.setText("Remote");
+            // change the connect button to disconnect
             connectionButton.setText("Disconnect");
         } else {
+            // Set the mode label to local
             opModeValue.setText("Local");
+            // set the disconnect button to connect
             connectionButton.setText("Connect");
-            //connect = false;
+            // enable both the dropdowns
             maxValue.setEnabled(true);
             minValue.setEnabled(true);
         }
     }
 
+    // A method to alter the text in the scrollable text box
     public void alterText(String text) {
+        // Display the time the message was posted to the text area as well as the text passed
         now = Calendar.getInstance();
         textSpace.append(dateFormat.format(now.getTime()) + " | " + text + "\n");
     }
@@ -373,8 +417,10 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     @Override
     public void run() {
+        // Show the GUI
         setVisible(true);
-        while (t1.isRunning()) {
+        // Update the time in near real time
+        while (dataShare.isRunning()) {
             updateTime();
         }
     }

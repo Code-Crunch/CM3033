@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author samc
+ * @author Sam Cusson 1006286
  */
 public class Client implements Runnable {
     ////////////////////////////
@@ -39,12 +39,12 @@ public class Client implements Runnable {
     // A blank variable to confirm the maxmin value was recieved
     String maxMin = "";
     // A variable to store the sahred data
-    volatile Test1 shared;
+    volatile DataShare shared;
 
     ////////////////////////////
     //////  CONSTRUCTOR  ///////
     ////////////////////////////
-    public Client(Test1 t2) {
+    public Client(DataShare t2) {
         // Set the local shared data to the passed shared Data.
         shared = t2;
     }
@@ -65,19 +65,21 @@ public class Client implements Runnable {
                         if (ip != null) {
                             // Set the new Socket
                             requestSocket = new Socket(ip, 8189);
-                            // Print connection details
-                            System.out.println("Client>Connected to "
-                                    + requestSocket.getLocalAddress().getHostName()
-                                    + " on port " + requestSocket.getLocalPort());
-                            // configure the out stream
-                            out = new PrintWriter(requestSocket.getOutputStream(), true /* auto flush */);
-                            // configure the in stream
-                            in = new BufferedReader(new InputStreamReader(requestSocket.getInputStream()));
-                            // set the shared connected to true. 
-                            shared.setConnected(true);
-                            // Add to the message count (Becuase confirmation of connection from the server)
-                            messageCount++;
-
+                            
+                            if (requestSocket.isConnected() && !requestSocket.isClosed()) {
+                                // Print connection details
+                                System.out.println("Client>Connected to "
+                                        + requestSocket.getLocalAddress().getHostName()
+                                        + " on port " + requestSocket.getLocalPort());
+                                // configure the out stream
+                                out = new PrintWriter(requestSocket.getOutputStream(), true /* auto flush */);
+                                // configure the in stream
+                                in = new BufferedReader(new InputStreamReader(requestSocket.getInputStream()));
+                                // set the shared connected to true. 
+                                shared.setConnected(true);
+                                // Add to the message count (Becuase confirmation of connection from the server)
+                                messageCount++;
+                            }
                             // If the in stream is ready
                             if (in.ready()) {
                                 // If shared MaxMin is not null

@@ -13,33 +13,39 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author David
+ * @author Sam Cusson 1006286
  */
 public class StartServer {
-  public static void main(String[] args){
-    int tpSize = 5;
-    ThreadPoolExecutor pool = new ThreadPoolExecutor(
-              tpSize,
-              tpSize,
-              50000L,
-              TimeUnit.MILLISECONDS,
-              new LinkedBlockingQueue<Runnable>());
-    try 
-    { 
-      ServerSocket s = new ServerSocket(8189) ;
-      System.out.println("Server>Waiting For Clients...");
-      // listen for a connection request on server socket s
-      // incoming is the connection socket
-      for(;;)
-      { 
-        Socket incoming = s.accept() ;
-        pool.execute(new Server(incoming));
-      }
+
+    public static void main(String[] args) {
+        // Set the thread size
+        int tpSize = 4;
+        // Start the thread pool
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(
+                tpSize,
+                tpSize,
+                50000L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
+        try {
+            // Try start the server on port 8189
+            ServerSocket socketServer = new ServerSocket(8189);
+            // Print that it is waiting for clients
+            System.out.println("Server>Waiting For Clients...");
+            // listen for a connection request on SocketServer
+            // incoming is the connection socket
+            for (;;) {
+                // Accecpt the requested connection if there are less than 4 active threads
+                 
+                    Socket incoming = socketServer.accept();
+                    // Start a server instance using the incoming conncetion
+                    pool.execute(new Server(incoming,pool.getPoolSize()));
+                 
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        // Close the pool if an error occurs
+        pool.shutdown();
     }
-    catch(IOException e)
-    {
-        System.out.println(e);
-    }
-    pool.shutdown();
-  }   
 }

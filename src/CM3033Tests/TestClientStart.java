@@ -13,13 +13,16 @@ import java.io.IOException;
  */
 public class TestClientStart {
 
-    static volatile Test1 t1 = new Test1();
+    // Create a datashare to pass data
+    static volatile DataShare t1 = new DataShare();
 
     public static void main(String args[]) throws IOException {
+        // create the client Thread
         Thread client = new Thread(new Client(t1));
+        // create a thread to store the GUI
         Thread clientGUI = new Thread(new ClientApp(t1));
 
-        
+        // Start both threads
         clientGUI.start();
         client.start();
     }
