@@ -35,7 +35,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     public ClientApp() throws IOException {
         initComponents();
-
+        textSpace.setEditable(false);
         //sendButton.setVisible(false);
         text = "";
         maxValue.removeAllItems();

@@ -65,5 +65,4 @@ public class HeartBeat {
         return temp;
     }
 
-   
 }
