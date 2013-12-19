@@ -78,10 +78,10 @@ public class HeartBeat extends Thread {
                     if (str.matches(check1) || str.matches(check2) || str.matches(check3)) {
                         temp = Integer.parseInt(str) + r.nextInt(10);
                         //check for the values to be between 0-300 as there will never be a bpm that high
-                        if (temp > 0 && temp < 300) {
+                        if (temp > 0 && temp <= 200) {
                             isValid = true;
                         } else {
-                            JOptionPane.showMessageDialog(null, "Please only use values lower than 300");
+                            JOptionPane.showMessageDialog(null, "Please only use values lower than 200");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Please only use numerical values");
