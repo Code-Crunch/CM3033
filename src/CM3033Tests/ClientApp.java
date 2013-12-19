@@ -432,6 +432,14 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         setVisible(true);
         while (t1.isRunning()) {
             updateTime();
+            if (t1.isConnected()) {
+                try {
+                    alterText(hb.genTime(hb.getRandom()));
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
         }
     }
 }
