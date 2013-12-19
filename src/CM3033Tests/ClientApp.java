@@ -30,6 +30,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     Alarm a;
     HeartBeat hb;
     int heartbeatValue;
+    int delay;
 
     //public volatile boolean running;
     //public volatile boolean connect;
@@ -75,6 +76,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
         a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
         hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
+        delay = 10000;
     }
 
     /**
@@ -103,6 +105,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         elapsedTimeValue = new javax.swing.JLabel();
         sendBPM = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuExit = new javax.swing.JMenu();
         resetMenu = new javax.swing.JMenuItem();
@@ -168,6 +171,13 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
         jLabel1.setText("Send new Heart Beat value");
 
+        jButton1.setText("Change delay");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         menuExit.setText("File");
 
         resetMenu.setText("Reset");
@@ -219,15 +229,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
                                 .addComponent(minValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bpmLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bpmValue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(maxLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addComponent(connectionButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
@@ -237,7 +238,19 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(currentTimeValue)
-                                    .addComponent(elapsedTimeValue, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                    .addComponent(elapsedTimeValue, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bpmLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bpmValue)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(maxLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(35, 35, 35)
@@ -283,7 +296,8 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sendBPM)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -355,7 +369,26 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_sendBPMActionPerformed
 
-    // A method to update the time
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String check1 = "[0-9]";
+        String check2 = "[0-9]{0,9}";
+        String str = JOptionPane.showInputDialog("chose a delay between 1-60 seconds");
+        if (str != null) {
+            if (str.matches(check1) || str.matches(check2)) {
+                int temp = Integer.parseInt(str);
+                if (temp > 0 && temp <= 60) {
+                    delay = temp * 1000;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please only use values lower than 200");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please only use numerical values");
+
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+// A method to update the time
     public void updateTime() {
         // set the now calander
         now = Calendar.getInstance();
@@ -457,7 +490,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     public void updateLog() {
         if (dataShare.isConnected()) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(delay);
                 int placeHolder = hb.getRandom();
                 alterText(hb.genTime(placeHolder));
                 updateBpm(String.valueOf(placeHolder));
@@ -465,9 +498,11 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
                 if (a.info() != null) {
                     alterText(a.info());
                     a.setInfo(null);
+
                 }
             } catch (InterruptedException ex) {
-                Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ClientApp.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -483,6 +518,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel elapsedTime;
     private javax.swing.JLabel elapsedTimeValue;
     private javax.swing.JMenuItem exit;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
