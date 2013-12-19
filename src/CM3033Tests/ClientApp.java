@@ -425,7 +425,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
             hb.isManual();
 
-                   // Set the mode label to local
+            // Set the mode label to local
             opModeValue.setText("Local");
             // set the disconnect button to connect
             connectionButton.setText("Connect");
@@ -448,6 +448,18 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     public int getHb() {
         return heartbeatValue;
+    }
+
+    public void updateLog() {
+        if (dataShare.isConnected()) {
+            try {
+                Thread.sleep(1000);
+                alterText(hb.genTime(hb.getRandom()));
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -483,14 +495,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         // Update the time in near real time
         while (dataShare.isRunning()) {
             updateTime();
-            if (dataShare.isConnected()) {
-                try {
-                    alterText(hb.genTime(hb.getRandom()));
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
+            updateLog();
         }
     }
 }

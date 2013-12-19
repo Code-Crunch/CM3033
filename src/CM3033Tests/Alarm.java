@@ -29,6 +29,7 @@ public class Alarm {
     final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     Calendar start = null;
     Calendar stop = null;
+    //strings for logging the alarms start and stop time
     private String s, st;
 //constructor
 

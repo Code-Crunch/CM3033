@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 /**
  *
  * @author Florin Mazilu 1114040
@@ -40,10 +41,12 @@ public class HeartBeat extends Thread {
     public void isAutomatic() {
         automatic = true;
     }
+//returns whether the heartbeat is automatic or not 
 
     public boolean auto() {
         return automatic;
     }
+//generates a time for the BPM
 
     public String genTime(int rand) throws InterruptedException {
         start = Calendar.getInstance();
