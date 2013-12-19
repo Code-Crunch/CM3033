@@ -98,8 +98,6 @@ public class HeartBeat extends Thread {
     @Override
 
     public void run() {
-
         BPM = getRandom();
-
     }
 }
