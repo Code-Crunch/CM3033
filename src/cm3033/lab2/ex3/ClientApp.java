@@ -6,6 +6,8 @@
 package cm3033.lab2.ex3;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,12 +16,12 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
  * @author Florin
  */
-
 public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     public volatile String text;
@@ -288,19 +290,36 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_exitActionPerformed
 
     private void conectionsLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectionsLeftActionPerformed
-        hb.isAutomatic();
-        try {
-            int temp = hb.getRandom();
-            a.check(temp);
-            if (a.alarm != null) {
-                alterText(a.info());
-                a.alarm = null;
-            } else {
-                alterText(hb.genTime(temp));
-            }
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
+        if (hb.auto()) {
+            hb.isManual();
+        } else {
+            hb.isAutomatic();
         }
+        ActionListener actionlistener = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                while (hb.auto()) {
+                    now = Calendar.getInstance();
+                    Date time = now.getTime();
+                    int place = hb.getRandom();
+                    a.check(place);
+                    if (a.alarm != null) {
+                        alterText(a.info());
+                        a.alarm = null;
+                    } else {
+                        try {
+                            alterText(hb.genTime(place));
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                }
+            }
+        };
+        Timer t = new Timer(1000, actionlistener);
+        t.start();
     }//GEN-LAST:event_conectionsLeftActionPerformed
 
     private void resetMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetMenuActionPerformed
@@ -327,18 +346,19 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_maxValueActionPerformed
 //send a user inputted BPM
     private void sendBPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBPMActionPerformed
+        //set the high and low  value of the BPM for the alarm
+        a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
+        a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
+        //create a random bpm based on the user input
+        heartbeatValue = hb.getRandom();
+        updateBpm(String.valueOf(heartbeatValue));
         try {
-            //set the high and low  value of the BPM for the alarm
-            a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
-            a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
-            //create a random bpm based on the user input
-            heartbeatValue = hb.getRandom();
-            updateBpm(String.valueOf(heartbeatValue));
-            //check with the alarm if the value is between the high and low
-            a.check(heartbeatValue);
+            alterText(hb.genTime(heartbeatValue));
         } catch (InterruptedException ex) {
             Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //check with the alarm if the value is between the high and low
+        a.check(heartbeatValue);
         //log the alarm if it is triggered
         if (a.alarm != null) {
             alterText(a.info());
