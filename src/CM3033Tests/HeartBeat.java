@@ -50,6 +50,7 @@ public class HeartBeat extends Thread {
     }
 
     public int getCurrentBPM() {
+        BPM = getRandom();
         return BPM;
     }
 
@@ -111,6 +112,8 @@ public class HeartBeat extends Thread {
     @Override
 
     public void run() {
-        BPM = getRandom();
+        for (int i = 0; i < 5; i++) {
+            BPM = getRandom();
+        }
     }
 }

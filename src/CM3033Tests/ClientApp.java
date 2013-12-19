@@ -339,7 +339,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
         a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
         dataShare.setHbLimits(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
-        dataShare.runHb();
+
     }//GEN-LAST:event_connectionButtonActionPerformed
 
     private void minValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minValueActionPerformed
@@ -357,7 +357,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
             a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
             dataShare.setHbLimits(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
-            dataShare.runHb();
             heartbeatValue = dataShare.getHb();
             updateBpm(String.valueOf(heartbeatValue));
             alterText(dataShare.genTime());
