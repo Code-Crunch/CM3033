@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cm3033.lab2.ex3;
+package CM3033Tests;
 
 import java.util.Random;
 import javax.swing.JOptionPane;
@@ -11,12 +11,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 /**
  *
  * @author Florin Mazilu 1114040
  */
-public class HeartBeat {
+public class HeartBeat extends Thread {
 //create a random for the BPM
 
     private Random r;
@@ -28,7 +27,7 @@ public class HeartBeat {
     //boolean that decides if the bpm should be user inputted or automatic
     private boolean automatic = false;
     //gen date time for logging when a BPM is automaticly generated
-    private final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private Calendar start = null;
 
     //constructor
@@ -42,19 +41,27 @@ public class HeartBeat {
         automatic = true;
     }
 
+    public boolean auto() {
+        return automatic;
+    }
+
     public String genTime(int rand) throws InterruptedException {
         start = Calendar.getInstance();
         Date time = start.getTime();
-        String str = "BPM generated : " + rand + ", generated at :" + dateFormat.format(time);
+        String str = "BPM generated : " + rand + ", generated at :" + dateFormat.format(time.getTime());
         return str;
+    }
+
+    public void isManual() {
+        automatic = false;
     }
 //generate a random integer between 0 and the max value
 
-    public int getRandom() throws InterruptedException {
+    public int getRandom() {
         //generate a temp value for the random;
         int temp = 0;
         if (automatic) {
-            temp = r.nextInt(max);
+            temp = r.nextInt(max - 20) + 20;
         } else {            //if the input is not automatic prompt the user for an input and a random number between 0-10 for variation
             //user validation for using only numbers
             boolean isValid = false;
@@ -68,10 +75,10 @@ public class HeartBeat {
                     if (str.matches(check1) || str.matches(check2) || str.matches(check3)) {
                         temp = Integer.parseInt(str) + r.nextInt(10);
                         //check for the values to be between 0-300 as there will never be a bpm that high
-                        if (temp > 0 && temp < 300) {
+                        if (temp > 0 && temp <= 200) {
                             isValid = true;
                         } else {
-                            JOptionPane.showMessageDialog(null, "Please only use values lower than 300");
+                            JOptionPane.showMessageDialog(null, "Please only use values lower than 200");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Please only use numerical values");
@@ -82,5 +89,4 @@ public class HeartBeat {
         }
         return temp;
     }
-
 }

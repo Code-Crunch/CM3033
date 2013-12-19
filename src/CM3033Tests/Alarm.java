@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cm3033.lab2.ex3;
+package CM3033Tests;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,12 +24,12 @@ public class Alarm {
     boolean isActive;
     boolean ishigh;
     //String that stores what the alarm was
-    String alarm;
+    private String alarm;
     //for logging when an alarm is started and stopped
     final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    Calendar start = Calendar.getInstance();
+    Calendar start = null;
     Calendar stop = null;
-    String s;
+    private String s, st;
 //constructor
 
     public Alarm(int low, int high) {
@@ -42,6 +42,9 @@ public class Alarm {
 //activate the alarm
 
     public void activate() {
+        start = Calendar.getInstance();
+        Date time = start.getTime();
+        st = dateFormat.format(time);
         isActive = true;
     }
 //deactivate alarm
@@ -77,12 +80,12 @@ public class Alarm {
                 && ishigh) {
             JOptionPane.showMessageDialog(null, "ALERT: HEART BEAT TOO HIGH");
             deactivate();
-            alarm = "ALERT: HEART BEAT TOO HIGH, stopped at :" + s;
+            alarm = "ALERT: TOO HIGH, started at : " + st + ",stopped at :" + s;
         } else if (active()
                 && !ishigh) {
             JOptionPane.showMessageDialog(null, "ALERT: HEART BEAT TOO LOW");
             deactivate();
-            alarm = "ALERT: HEART BEAT TOO LOW, stopped at :" + s;
+            alarm = "ALERT: TOO LOW, started at : " + st + ",stopped at :" + s;
         }
     }
 //check how long it has been since the last response
@@ -106,6 +109,10 @@ public class Alarm {
 
     public void setHigh(int high) {
         this.high = high;
+    }
+
+    public void setInfo(String s) {
+        alarm = s;
     }
 
 }
