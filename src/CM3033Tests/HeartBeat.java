@@ -85,7 +85,7 @@ public class HeartBeat extends Thread {
             if (!hbi.isVisible()) {
                 hbi.setVisible(true);
             }
-            if (hbi.getBpm() > 0) {
+            if (hbi.getBpm() > 1) {
                 temp = hbi.getBpm();
                 BPM = temp;
                 System.out.println(BPM);

@@ -146,12 +146,12 @@ public class HeartBeatInput extends javax.swing.JFrame {
             }
         }
         Random r = new Random();
-        int i = r.nextInt(1);
+        int i = r.nextInt(2);
         switch (i) {
-            case 0:
+            case 1:
                 BPM += tolerance;
                 break;
-            case 1:
+            case 2:
                 BPM -= tolerance;
                 break;
         }
