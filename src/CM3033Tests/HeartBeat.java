@@ -30,7 +30,7 @@ public class HeartBeat extends Thread {
     //boolean that decides if the bpm should be user inputted or automatic
     private boolean automatic = false;
     //gen date time for logging when a BPM is automaticly generated
-    private final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private Calendar start = null;
 
     //constructor
@@ -51,7 +51,7 @@ public class HeartBeat extends Thread {
     public String genTime(int rand) throws InterruptedException {
         start = Calendar.getInstance();
         Date time = start.getTime();
-        String str = "BPM generated : " + rand + ", generated at :" + dateFormat.format(time);
+        String str = "BPM generated : " + rand + ", generated at :" + dateFormat.format(time.getTime());
         return str;
     }
 
