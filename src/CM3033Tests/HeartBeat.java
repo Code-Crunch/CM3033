@@ -22,8 +22,6 @@ public class HeartBeat extends Thread {
     private Random r;
     //set a max value that the BPM can be 
     private int max, min;
-    //returns the automatic bpm
-    private int autoBPM;
     //boolean that decides if the bpm should be user inputted or automatic
     private boolean automatic = false;
     //gen date time for logging when a BPM is automaticly generated
