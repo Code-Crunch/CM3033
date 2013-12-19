@@ -19,12 +19,15 @@ public class Server implements Runnable {
     // store the incoming connection
     private Socket incoming;
     private int number;
+    private ServerApp serverApp;
 
     // Create the server using the passed incoming code
-    public Server(Socket incoming, int no) {
+    public Server(Socket incoming, int no, ServerApp sa) {
         // Set this's incoming to the passed on
         this.incoming = incoming;
         this.number = no;
+        this.serverApp = sa; //@ MS
+        sa.setVisible(true); //@ MS
     }
 
     @Override
@@ -33,6 +36,7 @@ public class Server implements Runnable {
             // Configure the listener/sender
             BufferedReader in = new BufferedReader(new InputStreamReader(incoming.getInputStream()));
             PrintWriter out = new PrintWriter(incoming.getOutputStream(), true /* auto flush */);
+            
             // Once connected, let the user know so by printing the details
             out.println(number + " You are connected to "
                     + incoming.getLocalAddress().getHostName()
@@ -50,9 +54,9 @@ public class Server implements Runnable {
                     // If the string is not null
                     if (str != null) {
                         // Send the receive value back to the client
-                        out.println("Recieved: " + str);
+                        out.println("Received: " + str);
                         // Print the recieve value
-                        System.out.println("Recieved: " + str);
+                        System.out.println("Receieved: " + str);
                         // If the string is bye
                         if (str.trim().equals("BYE")) {
                             // Print that machine is disconnecting

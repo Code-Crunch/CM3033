@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package CM3033Tests;
 
 import java.io.IOException;
@@ -17,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class StartServer {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Set the thread size
         int tpSize = 4;
         // Start the thread pool
@@ -27,6 +23,9 @@ public class StartServer {
                 50000L,
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<Runnable>());
+        ServerApp serverApp = new ServerApp();
+       // ServerApp sv = new ServerApp();
+        //serverApp.setVisible(true);
         try {
             // Try start the server on port 8189
             ServerSocket socketServer = new ServerSocket(8189);
@@ -39,7 +38,7 @@ public class StartServer {
                  
                     Socket incoming = socketServer.accept();
                     // Start a server instance using the incoming conncetion
-                    pool.execute(new Server(incoming,pool.getPoolSize()));
+                    pool.execute(new Server(incoming,pool.getPoolSize(), serverApp));
                  
             }
         } catch (IOException e) {

@@ -34,7 +34,7 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
     //////  CONSTRUCTOR  ///////
     ////////////////////////////
     
-    public ServerApp(DataShare ds2) throws IOException {
+    public ServerApp() throws IOException {
         // Initialise the components
         initComponents();
         
@@ -46,7 +46,7 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
         //minValue.removeAllItems();
 
         // Add the options to the max/min
-        maxValue.addItem(40);
+        /*maxValue.addItem(40);
         maxValue.addItem(60);
         maxValue.addItem(80);
         maxValue.addItem(100);
@@ -63,9 +63,10 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
         minValue.addItem(120);
         minValue.addItem(140);
         minValue.addItem(160);
-        minValue.addItem(180);
+        minValue.addItem(180);*/
 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,8 +77,6 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        maxLabel = new javax.swing.JLabel();
-        maxValue = new javax.swing.JComboBox();
         topPanel = new javax.swing.JPanel();
         elapsedTimeValue = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -86,26 +85,52 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
         elapsedTime = new javax.swing.JLabel();
         currentTimeValue = new javax.swing.JLabel();
         Connection1 = new javax.swing.JPanel();
-        bpmLabel = new javax.swing.JLabel();
+        bpmLabel1 = new javax.swing.JLabel();
         bpmValue1 = new javax.swing.JLabel();
-        lastUpdateLabel = new javax.swing.JLabel();
-        lastUpdateValue = new javax.swing.JTextField();
+        lastUpdateLabel1 = new javax.swing.JLabel();
+        lastUpdateValue1 = new javax.swing.JTextField();
         maxLabel1 = new javax.swing.JLabel();
         minLabel1 = new javax.swing.JLabel();
         maxValue1 = new javax.swing.JLabel();
         minValue1 = new javax.swing.JLabel();
         alarmLog1 = new javax.swing.JScrollPane();
+        Connection2 = new javax.swing.JPanel();
+        bpmLabel2 = new javax.swing.JLabel();
+        bpmValue2 = new javax.swing.JLabel();
+        lastUpdateLabel2 = new javax.swing.JLabel();
+        lastUpdateValue2 = new javax.swing.JTextField();
+        maxLabel2 = new javax.swing.JLabel();
+        minLabel2 = new javax.swing.JLabel();
+        maxValue2 = new javax.swing.JLabel();
+        minValue2 = new javax.swing.JLabel();
+        alarmLog2 = new javax.swing.JScrollPane();
+        Connection3 = new javax.swing.JPanel();
+        bpmLabel3 = new javax.swing.JLabel();
+        bpmValue3 = new javax.swing.JLabel();
+        lastUpdateLabel3 = new javax.swing.JLabel();
+        lastUpdateValue3 = new javax.swing.JTextField();
+        maxLabel3 = new javax.swing.JLabel();
+        minLabel3 = new javax.swing.JLabel();
+        maxValue3 = new javax.swing.JLabel();
+        minValue3 = new javax.swing.JLabel();
+        alarmLog3 = new javax.swing.JScrollPane();
+        Connection4 = new javax.swing.JPanel();
+        bpmLabel4 = new javax.swing.JLabel();
+        bpmValue4 = new javax.swing.JLabel();
+        lastUpdateLabel4 = new javax.swing.JLabel();
+        lastUpdateValue4 = new javax.swing.JTextField();
+        maxLabel4 = new javax.swing.JLabel();
+        minLabel4 = new javax.swing.JLabel();
+        maxValue4 = new javax.swing.JLabel();
+        minValue4 = new javax.swing.JLabel();
+        alarmLog4 = new javax.swing.JScrollPane();
+        alarmButtons = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        maxLabel.setText("Max:");
-
-        maxValue.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        maxValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maxValueActionPerformed(evt);
-            }
-        });
 
         elapsedTimeValue.setText("00:00:00");
 
@@ -159,18 +184,18 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
         Connection1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         Connection1.setName("Patient 1"); // NOI18N
 
-        bpmLabel.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
-        bpmLabel.setText("Patient's BPM:");
+        bpmLabel1.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        bpmLabel1.setText("Patient's BPM:");
 
         bpmValue1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         bpmValue1.setForeground(new java.awt.Color(45, 2, 208));
         bpmValue1.setText("200");
 
-        lastUpdateLabel.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
-        lastUpdateLabel.setText("Last update:");
+        lastUpdateLabel1.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        lastUpdateLabel1.setText("Last update:");
 
-        lastUpdateValue.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lastUpdateValue.setText("jTextField1");
+        lastUpdateValue1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lastUpdateValue1.setText("jTextField1");
 
         maxLabel1.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         maxLabel1.setText("Max:");
@@ -206,13 +231,13 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
                         .addGap(18, 18, 18)
                         .addComponent(minValue1))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection1Layout.createSequentialGroup()
-                        .addComponent(bpmLabel)
+                        .addComponent(bpmLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bpmValue1))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection1Layout.createSequentialGroup()
-                        .addComponent(lastUpdateLabel)
+                        .addComponent(lastUpdateLabel1)
                         .addGap(6, 6, 6)
-                        .addComponent(lastUpdateValue, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)))
+                        .addComponent(lastUpdateValue1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         Connection1Layout.setVerticalGroup(
@@ -220,12 +245,12 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
             .addGroup(Connection1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Connection1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bpmLabel)
+                    .addComponent(bpmLabel1)
                     .addComponent(bpmValue1))
                 .addGap(11, 11, 11)
                 .addGroup(Connection1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lastUpdateLabel)
-                    .addComponent(lastUpdateValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lastUpdateLabel1)
+                    .addComponent(lastUpdateValue1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(Connection1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Connection1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -235,56 +260,370 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
                         .addComponent(minLabel1)
                         .addComponent(minValue1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(alarmLog1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(alarmLog1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         alarmLog1.getAccessibleContext().setAccessibleName("Alarm log");
+
+        Connection2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        Connection2.setName("Patient 1"); // NOI18N
+
+        bpmLabel2.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        bpmLabel2.setText("Patient's BPM:");
+
+        bpmValue2.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        bpmValue2.setForeground(new java.awt.Color(45, 2, 208));
+        bpmValue2.setText("200");
+
+        lastUpdateLabel2.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        lastUpdateLabel2.setText("Last update:");
+
+        lastUpdateValue2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lastUpdateValue2.setText("jTextField1");
+
+        maxLabel2.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        maxLabel2.setText("Max:");
+
+        minLabel2.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        minLabel2.setText("Min:");
+
+        maxValue2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        maxValue2.setText("60");
+
+        minValue2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        minValue2.setText("120");
+
+        alarmLog2.setToolTipText("");
+        alarmLog2.setAutoscrolls(true);
+        alarmLog2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        alarmLog2.setName("Alarm Log"); // NOI18N
+
+        javax.swing.GroupLayout Connection2Layout = new javax.swing.GroupLayout(Connection2);
+        Connection2.setLayout(Connection2Layout);
+        Connection2Layout.setHorizontalGroup(
+            Connection2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Connection2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Connection2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(alarmLog2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection2Layout.createSequentialGroup()
+                        .addComponent(maxLabel2)
+                        .addGap(28, 28, 28)
+                        .addComponent(maxValue2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(minLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(minValue2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection2Layout.createSequentialGroup()
+                        .addComponent(bpmLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bpmValue2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection2Layout.createSequentialGroup()
+                        .addComponent(lastUpdateLabel2)
+                        .addGap(6, 6, 6)
+                        .addComponent(lastUpdateValue2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        Connection2Layout.setVerticalGroup(
+            Connection2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Connection2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Connection2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bpmLabel2)
+                    .addComponent(bpmValue2))
+                .addGap(11, 11, 11)
+                .addGroup(Connection2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastUpdateLabel2)
+                    .addComponent(lastUpdateValue2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(Connection2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Connection2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(maxLabel2)
+                        .addComponent(maxValue2))
+                    .addGroup(Connection2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(minLabel2)
+                        .addComponent(minValue2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(alarmLog2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        Connection3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        Connection3.setName("Patient 1"); // NOI18N
+
+        bpmLabel3.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        bpmLabel3.setText("Patient's BPM:");
+
+        bpmValue3.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        bpmValue3.setForeground(new java.awt.Color(45, 2, 208));
+        bpmValue3.setText("200");
+
+        lastUpdateLabel3.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        lastUpdateLabel3.setText("Last update:");
+
+        lastUpdateValue3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lastUpdateValue3.setText("jTextField1");
+
+        maxLabel3.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        maxLabel3.setText("Max:");
+
+        minLabel3.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        minLabel3.setText("Min:");
+
+        maxValue3.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        maxValue3.setText("60");
+
+        minValue3.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        minValue3.setText("120");
+
+        alarmLog3.setToolTipText("");
+        alarmLog3.setAutoscrolls(true);
+        alarmLog3.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        alarmLog3.setName("Alarm Log"); // NOI18N
+
+        javax.swing.GroupLayout Connection3Layout = new javax.swing.GroupLayout(Connection3);
+        Connection3.setLayout(Connection3Layout);
+        Connection3Layout.setHorizontalGroup(
+            Connection3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Connection3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Connection3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(alarmLog3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection3Layout.createSequentialGroup()
+                        .addComponent(maxLabel3)
+                        .addGap(28, 28, 28)
+                        .addComponent(maxValue3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(minLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(minValue3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection3Layout.createSequentialGroup()
+                        .addComponent(bpmLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bpmValue3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection3Layout.createSequentialGroup()
+                        .addComponent(lastUpdateLabel3)
+                        .addGap(6, 6, 6)
+                        .addComponent(lastUpdateValue3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        Connection3Layout.setVerticalGroup(
+            Connection3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Connection3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Connection3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bpmLabel3)
+                    .addComponent(bpmValue3))
+                .addGap(11, 11, 11)
+                .addGroup(Connection3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastUpdateLabel3)
+                    .addComponent(lastUpdateValue3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(Connection3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Connection3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(maxLabel3)
+                        .addComponent(maxValue3))
+                    .addGroup(Connection3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(minLabel3)
+                        .addComponent(minValue3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(alarmLog3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        Connection4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        Connection4.setName("Patient 1"); // NOI18N
+
+        bpmLabel4.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        bpmLabel4.setText("Patient's BPM:");
+
+        bpmValue4.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        bpmValue4.setForeground(new java.awt.Color(45, 2, 208));
+        bpmValue4.setText("200");
+
+        lastUpdateLabel4.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        lastUpdateLabel4.setText("Last update:");
+
+        lastUpdateValue4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lastUpdateValue4.setText("jTextField1");
+
+        maxLabel4.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        maxLabel4.setText("Max:");
+
+        minLabel4.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        minLabel4.setText("Min:");
+
+        maxValue4.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        maxValue4.setText("60");
+
+        minValue4.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        minValue4.setText("120");
+
+        alarmLog4.setToolTipText("");
+        alarmLog4.setAutoscrolls(true);
+        alarmLog4.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        alarmLog4.setName("Alarm Log"); // NOI18N
+
+        javax.swing.GroupLayout Connection4Layout = new javax.swing.GroupLayout(Connection4);
+        Connection4.setLayout(Connection4Layout);
+        Connection4Layout.setHorizontalGroup(
+            Connection4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Connection4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Connection4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(alarmLog4)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection4Layout.createSequentialGroup()
+                        .addComponent(maxLabel4)
+                        .addGap(28, 28, 28)
+                        .addComponent(maxValue4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(minLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(minValue4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection4Layout.createSequentialGroup()
+                        .addComponent(bpmLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bpmValue4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Connection4Layout.createSequentialGroup()
+                        .addComponent(lastUpdateLabel4)
+                        .addGap(6, 6, 6)
+                        .addComponent(lastUpdateValue4, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        Connection4Layout.setVerticalGroup(
+            Connection4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Connection4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Connection4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bpmLabel4)
+                    .addComponent(bpmValue4))
+                .addGap(11, 11, 11)
+                .addGroup(Connection4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastUpdateLabel4)
+                    .addComponent(lastUpdateValue4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(Connection4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Connection4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(maxLabel4)
+                        .addComponent(maxValue4))
+                    .addGroup(Connection4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(minLabel4)
+                        .addComponent(minValue4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(alarmLog4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButton1.setText("Turn off alarm 1");
+
+        jButton2.setText("Turn off alarm 2");
+
+        jButton3.setText("Turn off alarm 3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Turn off alarm 4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout alarmButtonsLayout = new javax.swing.GroupLayout(alarmButtons);
+        alarmButtons.setLayout(alarmButtonsLayout);
+        alarmButtonsLayout.setHorizontalGroup(
+            alarmButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(alarmButtonsLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jButton1)
+                .addGap(108, 108, 108)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(27, 27, 27))
+        );
+        alarmButtonsLayout.setVerticalGroup(
+            alarmButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(alarmButtonsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(alarmButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jButton3))
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(Connection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 450, Short.MAX_VALUE)
-                .addComponent(maxLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Connection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(alarmButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Connection2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Connection4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(37, 37, 37))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(156, Short.MAX_VALUE)))
+                    .addContainerGap(238, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(22, 22, 22)
+                    .addComponent(Connection3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(488, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(maxLabel)
-                            .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(Connection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addComponent(Connection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Connection2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Connection4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(alarmButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 468, Short.MAX_VALUE)))
+                    .addGap(0, 607, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(76, 76, 76)
+                    .addComponent(Connection3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(367, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void maxValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxValueActionPerformed
-        // Test the dropdown variables with the max
-        testDropDowns("max");
-    }//GEN-LAST:event_maxValueActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // A method to update the time
     public void updateTime() {
@@ -299,7 +638,7 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
     }
 
     // The method to test dropdowns
-    private void testDropDowns(String v) {
+    /*private void testDropDowns(String v) {
         // if both max values and max strings have been initiated
         if (maxValue.getSelectedItem() != null && maxValue.getSelectedItem().toString() != null) {
             // if both max values and max strings have been initiated
@@ -341,10 +680,10 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
                 }
             }
         }
-    }
+    }*/
 
     // A method to the configure if the client is connected or not. 
-    public void setConnection(boolean connected) {
+    /*public void setConnection(boolean connected) {
         if (!connected) {
             // If connected, disable the dropdowns
             maxValue.setEnabled(false);
@@ -362,35 +701,68 @@ public class ServerApp extends javax.swing.JFrame implements Runnable {
             maxValue.setEnabled(true);
             minValue.setEnabled(true);
         }
-    }
+    }*/
 
     // A method to alter the text in the scrollable text box
-    public void alterText(String text) {
+    /*public void alterText(String text) {
         // Display the time the message was posted to the text area as well as the text passed
         now = Calendar.getInstance();
         textSpace.append(dateFormat.format(now.getTime()) + " | " + text + "\n");
-    }
+    }*/
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Connection1;
+    private javax.swing.JPanel Connection2;
+    private javax.swing.JPanel Connection3;
+    private javax.swing.JPanel Connection4;
+    private javax.swing.JPanel alarmButtons;
     private javax.swing.JScrollPane alarmLog1;
-    private javax.swing.JLabel bpmLabel;
+    private javax.swing.JScrollPane alarmLog2;
+    private javax.swing.JScrollPane alarmLog3;
+    private javax.swing.JScrollPane alarmLog4;
+    private javax.swing.JLabel bpmLabel1;
+    private javax.swing.JLabel bpmLabel2;
+    private javax.swing.JLabel bpmLabel3;
+    private javax.swing.JLabel bpmLabel4;
     private javax.swing.JLabel bpmValue1;
+    private javax.swing.JLabel bpmValue2;
+    private javax.swing.JLabel bpmValue3;
+    private javax.swing.JLabel bpmValue4;
     private javax.swing.JLabel currentTime;
     private javax.swing.JLabel currentTimeValue;
     private javax.swing.JLabel elapsedTime;
     private javax.swing.JLabel elapsedTimeValue;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lastUpdateLabel;
-    private javax.swing.JTextField lastUpdateValue;
-    private javax.swing.JLabel maxLabel;
+    private javax.swing.JLabel lastUpdateLabel1;
+    private javax.swing.JLabel lastUpdateLabel2;
+    private javax.swing.JLabel lastUpdateLabel3;
+    private javax.swing.JLabel lastUpdateLabel4;
+    private javax.swing.JTextField lastUpdateValue1;
+    private javax.swing.JTextField lastUpdateValue2;
+    private javax.swing.JTextField lastUpdateValue3;
+    private javax.swing.JTextField lastUpdateValue4;
     private javax.swing.JLabel maxLabel1;
-    private javax.swing.JComboBox maxValue;
+    private javax.swing.JLabel maxLabel2;
+    private javax.swing.JLabel maxLabel3;
+    private javax.swing.JLabel maxLabel4;
     private javax.swing.JLabel maxValue1;
+    private javax.swing.JLabel maxValue2;
+    private javax.swing.JLabel maxValue3;
+    private javax.swing.JLabel maxValue4;
     private javax.swing.JLabel minLabel1;
+    private javax.swing.JLabel minLabel2;
+    private javax.swing.JLabel minLabel3;
+    private javax.swing.JLabel minLabel4;
     private javax.swing.JLabel minValue1;
+    private javax.swing.JLabel minValue2;
+    private javax.swing.JLabel minValue3;
+    private javax.swing.JLabel minValue4;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 
