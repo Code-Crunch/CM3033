@@ -6,13 +6,10 @@
 package CM3033Tests;
 
 import java.util.Random;
-import javax.swing.JOptionPane;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -85,12 +82,8 @@ public class HeartBeat extends Thread {
             if (!hbi.isVisible()) {
                 hbi.setVisible(true);
             }
-            if (hbi.getBpm() > 1) {
-                temp = hbi.getBpm();
-                BPM = temp;
-                System.out.println(BPM);
-            }
-
+            temp = hbi.getBpm();
+            BPM = temp;
         }
         return temp;
     }

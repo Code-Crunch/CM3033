@@ -147,9 +147,7 @@ public class HeartBeatInput extends javax.swing.JFrame {
         }
         Random r = new Random();
         int i = r.nextInt(tolerance);
-        System.out.println(i);
         BPM += i;
-        System.out.println(BPM);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
     public int getBpm() {

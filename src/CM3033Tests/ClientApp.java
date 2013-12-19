@@ -72,7 +72,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         minValue.addItem(140);
         minValue.addItem(160);
         minValue.addItem(180);
-
         a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
         dataShare.setMax(Integer.parseInt(maxValue.getSelectedItem().toString()));
         dataShare.setMin(Integer.parseInt(minValue.getSelectedItem().toString()));
@@ -358,12 +357,14 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
             dataShare.setHbLimits(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
             heartbeatValue = dataShare.getHb();
-            updateBpm(String.valueOf(heartbeatValue));
-            alterText(dataShare.genTime());
-            a.check(heartbeatValue);
-            if (a.info() != null) {
-                alterText(a.info());
-                a.setInfo(null);
+            if (heartbeatValue > 0) {
+                updateBpm(String.valueOf(heartbeatValue));
+                alterText(dataShare.genTime());
+                a.check(heartbeatValue);
+                if (a.info() != null) {
+                    alterText(a.info());
+                    a.setInfo(null);
+                }
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
