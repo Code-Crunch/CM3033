@@ -21,7 +21,7 @@ public class HeartBeat extends Thread {
 
     private Random r;
     //set a max value that the BPM can be 
-    private int max;
+    private int max, min;
     //returns the automatic bpm
     private int autoBPM;
 
@@ -32,9 +32,10 @@ public class HeartBeat extends Thread {
     private Calendar start = null;
 
     //constructor
-    public HeartBeat(int max) {
+    public HeartBeat(int max, int min) {
         r = new Random();
         this.max = max;
+        this.min = min;
     }
 //set automatic true
 
@@ -58,13 +59,18 @@ public class HeartBeat extends Thread {
     public void isManual() {
         automatic = false;
     }
+
+    public void setMaxMin(int min, int max) {
+        this.min = min;
+        this.max = max;
+    }
 //generate a random integer between 0 and the max value
 
     public int getRandom() {
         //generate a temp value for the random;
         int temp = 0;
         if (automatic) {
-            temp = r.nextInt(max - 20) + 20;
+            temp = r.nextInt(max - min) + min;
         } else {            //if the input is not automatic prompt the user for an input and a random number between 0-10 for variation
             //user validation for using only numbers
             boolean isValid = false;

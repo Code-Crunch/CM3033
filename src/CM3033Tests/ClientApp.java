@@ -74,7 +74,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         minValue.addItem(180);
 
         a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
-        hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()));
+        hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
     }
 
     /**
@@ -321,6 +321,9 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             // Set the connection to that value
             setConnection(!dataShare.isConnect());
         }
+        a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
+        a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
+        hb.setMaxMin(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
 
     }//GEN-LAST:event_connectionButtonActionPerformed
 
@@ -338,6 +341,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         try {
             a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
             a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
+            hb.setMaxMin(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
             heartbeatValue = hb.getRandom();
             updateBpm(String.valueOf(heartbeatValue));
             alterText(hb.genTime(heartbeatValue));
@@ -454,7 +458,14 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         if (dataShare.isConnected()) {
             try {
                 Thread.sleep(1000);
-                alterText(hb.genTime(hb.getRandom()));
+                int placeHolder = hb.getRandom();
+                alterText(hb.genTime(placeHolder));
+                updateBpm(String.valueOf(placeHolder));
+                a.check(placeHolder);
+                if (a.info() != null) {
+                    alterText(a.info());
+                    a.setInfo(null);
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
             }
