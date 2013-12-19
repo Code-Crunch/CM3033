@@ -43,9 +43,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
         t1 = t2;
 
-        a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
-        hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()));
-
         maxValue.removeAllItems();
         minValue.removeAllItems();
 
@@ -69,6 +66,8 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         minValue.addItem(160);
         minValue.addItem(180);
 
+        a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
+        hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()));
     }
 
     /**
@@ -319,15 +318,19 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_maxValueActionPerformed
 
     private void sendBPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBPMActionPerformed
-        a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
-        a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
-        heartbeatValue = hb.getRandom();
-        updateBpm(String.valueOf(heartbeatValue));
-        alterText(hb.genTime(heartbeatValue));
-        a.check(heartbeatValue);
-        if (a.info() != null) {
-            alterText(a.info());
-            a.setInfo(null);
+        try {
+            a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
+            a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
+            heartbeatValue = hb.getRandom();
+            updateBpm(String.valueOf(heartbeatValue));
+            alterText(hb.genTime(heartbeatValue));
+            a.check(heartbeatValue);
+            if (a.info() != null) {
+                alterText(a.info());
+                a.setInfo(null);
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_sendBPMActionPerformed
 

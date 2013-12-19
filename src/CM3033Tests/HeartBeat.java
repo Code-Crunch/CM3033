@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cm3033Tests;
+package CM3033Tests;
 
 import java.util.Random;
 import javax.swing.JOptionPane;
@@ -49,7 +49,9 @@ public class HeartBeat extends Thread {
     }
 
     public String genTime(int rand) throws InterruptedException {
-        String str = "BPM generated : " + rand + ", generated at :" + System.currentTimeMillis();
+        start = Calendar.getInstance();
+        Date time = start.getTime();
+        String str = "BPM generated : " + rand + ", generated at :" + dateFormat.format(time);
         return str;
     }
 
