@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author samc
  */
 public class TestClientStart {
-
+ 
     // Create a datashare to pass data
     static volatile DataShare t1 = new DataShare();
 

@@ -65,7 +65,7 @@ public class Client implements Runnable {
                         if (ip != null) {
                             // Set the new Socket
                             requestSocket = new Socket(ip, 8189);
-                            
+
                             if (requestSocket.isConnected() && !requestSocket.isClosed()) {
                                 // Print connection details
                                 System.out.println("Client>Connected to "
