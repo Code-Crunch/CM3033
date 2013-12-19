@@ -1,4 +1,9 @@
-package CM3033Tests;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cm3033.lab2.ex3;
 
 import java.awt.Component;
 import java.io.IOException;
@@ -12,63 +17,31 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Sam Cusson 1006286
+ * @author Florin
  */
+
 public class ClientApp extends javax.swing.JFrame implements Runnable {
 
-    ////////////////////////////
-    //////   VARIABLES   ///////
-    ////////////////////////////
-    
-    // variable to store the maxLimit and minLimit
+    public volatile String text;
     private int highValue, lowValue;
-    // variables to store the oldMaxLimit and oldMinLimit
     private int oldHighValue = highValue, oldLowValue = lowValue;
-    // A date format template
+    private String highLowValue;
     final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    // A calander to store the time of now and the time the application was started
     Calendar now = null, start = Calendar.getInstance();
-<<<<<<< HEAD
-
-    Test1 t1;
+    boolean running = true;
+    boolean connect = false;
     Alarm a;
     HeartBeat hb;
     int heartbeatValue;
 
-    //public volatile boolean running;
-    //public volatile boolean connect;
-    //public volatile boolean connected;
-    //public volatile String maxMin = "";
-    public ClientApp(Test1 t2) throws IOException {
-=======
-    // Variable to store the Shared Data class
-    DataShare dataShare;
-    
-    
-    ////////////////////////////
-    //////  CONSTRUCTOR  ///////
-    ////////////////////////////
-    
-    public ClientApp(DataShare ds2) throws IOException {
-        // Initialise the components
->>>>>>> origin/master
+    public ClientApp() throws IOException {
         initComponents();
-        
-        // set the data share to that passed to this class
-        dataShare = ds2;
-
-<<<<<<< HEAD
         textSpace.setEditable(false);
-
-        t1 = t2;
-
-=======
-        // Reset the max and min value dropdowns
->>>>>>> origin/master
+        //sendButton.setVisible(false);
+        text = "";
         maxValue.removeAllItems();
         minValue.removeAllItems();
 
-        // Add the options to the max/min
         maxValue.addItem(40);
         maxValue.addItem(60);
         maxValue.addItem(80);
@@ -78,6 +51,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         maxValue.addItem(160);
         maxValue.addItem(180);
         maxValue.addItem(200);
+
         minValue.addItem(20);
         minValue.addItem(40);
         minValue.addItem(60);
@@ -87,9 +61,9 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         minValue.addItem(140);
         minValue.addItem(160);
         minValue.addItem(180);
-
         a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
         hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()));
+
     }
 
     /**
@@ -221,44 +195,46 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(opModeLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(opModeValue, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(minLabel)
-                                .addGap(13, 13, 13)
-                                .addComponent(minValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bpmLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bpmValue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(maxLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(connectionButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(currentTime, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(elapsedTime, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(opModeLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(opModeValue, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(minLabel)
+                                        .addGap(13, 13, 13)
+                                        .addComponent(minValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(currentTimeValue)
-                                    .addComponent(elapsedTimeValue, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(connectionButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(currentTime, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(elapsedTime, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(currentTimeValue)
+                                            .addComponent(elapsedTimeValue, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(bpmLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(bpmValue)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(maxLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(35, 35, 35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sendBPM)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(168, 168, 168))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,12 +271,12 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bpmLabel)
                             .addComponent(bpmValue))))
-                .addGap(28, 28, 28)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sendBPM)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -308,160 +284,132 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        // Set the shared running to false
-        dataShare.setRunning(false);
+        running = false;
     }//GEN-LAST:event_exitActionPerformed
 
     private void conectionsLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectionsLeftActionPerformed
-
-    }//GEN-LAST:event_conectionsLeftActionPerformed
-
-    private void resetMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetMenuActionPerformed
-        // reset the text Space
-        textSpace.setText(null);
-    }//GEN-LAST:event_resetMenuActionPerformed
-
-    private void connectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectionButtonActionPerformed
-        // If the system is not connected
-        if (!dataShare.isConnect()) {
-            // set the data share to atempt to connect
-            dataShare.setConnect(!dataShare.isConnect());
-            // Set the connection
-            setConnection(!dataShare.isConnect());
-            // Show the values that have been set in the text area.
-            alterText("Min set to: " + lowValue + "\tMax set to: " + highValue);
-        } else {
-            // set shared data to disconncet
-            dataShare.setConnect(!dataShare.isConnect());
-            // Set the connection to that value
-            setConnection(!dataShare.isConnect());
-        }
-
-    }//GEN-LAST:event_connectionButtonActionPerformed
-
-    private void minValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minValueActionPerformed
-        // Test the dropdown vairables with min
-        testDropDowns("min");
-    }//GEN-LAST:event_minValueActionPerformed
-
-    private void maxValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxValueActionPerformed
-        // Test the dropdown variables with the max
-        testDropDowns("max");
-    }//GEN-LAST:event_maxValueActionPerformed
-
-<<<<<<< HEAD
-    private void sendBPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBPMActionPerformed
+        hb.isAutomatic();
         try {
-            a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
-            a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
-            heartbeatValue = hb.getRandom();
-            updateBpm(String.valueOf(heartbeatValue));
-            alterText(hb.genTime(heartbeatValue));
-            a.check(heartbeatValue);
-            if (a.info() != null) {
+            int temp = hb.getRandom();
+            a.check(temp);
+            if (a.alarm != null) {
                 alterText(a.info());
-                a.setInfo(null);
+                a.alarm = null;
+            } else {
+                alterText(hb.genTime(temp));
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_conectionsLeftActionPerformed
+
+    private void resetMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetMenuActionPerformed
+        textSpace.setText(null);
+    }//GEN-LAST:event_resetMenuActionPerformed
+
+    private void connectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectionButtonActionPerformed
+        if (!connect) {
+            setConnection(!connect);
+            alterText("Min set to: " + lowValue + "\tMax set to: " + highValue);
+        } else {
+            setConnection(!connect);
+        }
+
+
+    }//GEN-LAST:event_connectionButtonActionPerformed
+
+    private void minValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minValueActionPerformed
+        testDropDowns("min");
+    }//GEN-LAST:event_minValueActionPerformed
+
+    private void maxValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxValueActionPerformed
+        testDropDowns("max");
+    }//GEN-LAST:event_maxValueActionPerformed
+//send a user inputted BPM
+    private void sendBPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBPMActionPerformed
+        try {
+            //set the high and low  value of the BPM for the alarm
+            a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
+            a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
+            //create a random bpm based on the user input
+            heartbeatValue = hb.getRandom();
+            updateBpm(String.valueOf(heartbeatValue));
+            //check with the alarm if the value is between the high and low
+            a.check(heartbeatValue);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //log the alarm if it is triggered
+        if (a.alarm != null) {
+            alterText(a.info());
+            a.alarm = null;
+        }
+
     }//GEN-LAST:event_sendBPMActionPerformed
 
-=======
-    // A method to update the time
->>>>>>> origin/master
     public void updateTime() {
-        // set the now calander
         now = Calendar.getInstance();
-        // get the time from the now calander
         Date time = now.getTime();
-        // Set the time label to the selected time
         currentTimeValue.setText(dateFormat.format(time));
-        // Set the elapsed variable to the current time minus the start time.
         elapsedTimeValue.setText(dateFormat.format((time.getTime() - start.getTimeInMillis() - 3600000)));
     }
 
-    // The method to test dropdowns
     private void testDropDowns(String v) {
-        // if both max values and max strings have been initiated
         if (maxValue.getSelectedItem() != null && maxValue.getSelectedItem().toString() != null) {
-            // if both max values and max strings have been initiated
             if (minValue.getSelectedItem() != null && minValue.getSelectedItem().toString() != null) {
-                // Set highvalue to the value from the relative drop down
                 highValue = Integer.parseInt(maxValue.getSelectedItem().toString());
-                // Set highvalue to the value from the relative drop down
                 lowValue = Integer.parseInt(minValue.getSelectedItem().toString());
-                // If the high value is lower or equal to the min
                 if (highValue <= lowValue) {
                     switch (v) {
                         case "max":
-                            // If max, set the max to the old value
                             maxValue.setSelectedItem(oldHighValue);
-                            // break
                             break;
                         case "min":
-                            // if min, set the min to the old value
                             minValue.setSelectedItem(oldLowValue);
-                            // break
                             break;
                     }
-                    // Create a frame to display the error message
                     Component frame = null;
-                    // Show the error for the dropdown
                     JOptionPane.showMessageDialog(frame, "The \"Max Value\" must be more than the \"Min Value\"!");
                 } else {
-                    // Else valid change
                     switch (v) {
                         case "max":
-                            // set the oldMax to the new max
                             oldHighValue = highValue;
+                            break;
                         case "min":
-                            // set the oldMin to the new min
                             oldLowValue = lowValue;
+                            break;
                     }
-                    // Set the data share maxmin to the relevant value
-                    dataShare.setMaxMin(highValue + "," + lowValue);
+                    highLowValue = highValue + "," + lowValue;
                 }
             }
         }
     }
 
-    // A method to the configure if the client is connected or not. 
+    public String getMaxMin() {
+        return highLowValue;
+    }
+
     public void setConnection(boolean connected) {
-        if (!connected) {
-<<<<<<< HEAD
-            hb.isAutomatic();
-            //connect = true;
-=======
-            // If connected, disable the dropdowns
->>>>>>> origin/master
+        if (connected) {
+            connect = true;
             maxValue.setEnabled(false);
             minValue.setEnabled(false);
-            // Set the mode lable to remote
             opModeValue.setText("Remote");
-            // change the connect button to disconnect
             connectionButton.setText("Disconnect");
         } else {
-<<<<<<< HEAD
-            hb.isManual();
-=======
-            // Set the mode label to local
->>>>>>> origin/master
             opModeValue.setText("Local");
-            // set the disconnect button to connect
             connectionButton.setText("Connect");
-            // enable both the dropdowns
+            connect = false;
             maxValue.setEnabled(true);
             minValue.setEnabled(true);
         }
     }
 
-    // A method to alter the text in the scrollable text box
     public void alterText(String text) {
-        // Display the time the message was posted to the text area as well as the text passed
         now = Calendar.getInstance();
         textSpace.append(dateFormat.format(now.getTime()) + " | " + text + "\n");
     }
+//update the bpm text with the value recieved from the heartbeat class
 
     public void updateBpm(String bpm) {
         bpmValue.setText(bpm);
@@ -470,7 +418,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     public int getHb() {
         return heartbeatValue;
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bpmLabel;
     private javax.swing.JLabel bpmValue;
@@ -499,19 +446,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     @Override
     public void run() {
-        // Show the GUI
-        setVisible(true);
-        // Update the time in near real time
-        while (dataShare.isRunning()) {
-            updateTime();
-            if (t1.isConnected()) {
-                try {
-                    alterText(hb.genTime(hb.getRandom()));
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -7,24 +7,38 @@ package CM3033Tests;
 
 /**
  *
- * @author samc
+ * @author Sam Cusson 1006286
  */
-public class Test1 {
+public class DataShare {
 
+    ////////////////////////////
+    //////   VARIABLES   ///////
+    ////////////////////////////
+    // Store wether to connect or not
     public static volatile boolean connect = false;
+    // Store if connected or not
     public static volatile boolean connected = false;
+    // Store if running or not
     public static volatile boolean running = true;
+    // Store the max/min limits
     public static volatile String maxMin = "";
+    // BPM
 
-    public Test1() {
+    ////////////////////////////
+    //////  CONSTRUCTOR  ///////
+    ////////////////////////////
+    public DataShare() {
     }
 
+    //////////////////////////////
+    ////// GETTERS/SETTERS ///////
+    //////////////////////////////
     public boolean isConnect() {
         return connect;
     }
 
     public void setConnect(boolean connect) {
-        Test1.connect = connect;
+        DataShare.connect = connect;
     }
 
     public boolean isConnected() {
@@ -32,7 +46,7 @@ public class Test1 {
     }
 
     public void setConnected(boolean connected) {
-        Test1.connected = connected;
+        DataShare.connected = connected;
     }
 
     public boolean isRunning() {
@@ -40,7 +54,7 @@ public class Test1 {
     }
 
     public void setRunning(boolean running) {
-        Test1.running = running;
+        DataShare.running = running;
     }
 
     public String getMaxMin() {
@@ -48,7 +62,7 @@ public class Test1 {
     }
 
     public void setMaxMin(String maxMin) {
-        Test1.maxMin = maxMin;
+        DataShare.maxMin = maxMin;
     }
 
 }
