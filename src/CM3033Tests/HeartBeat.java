@@ -81,22 +81,25 @@ public class HeartBeat extends Thread {
         if (automatic) {
             temp = r.nextInt(max - min) + min;
             BPM = temp;
-        } else {            //if the input is not automatic prompt the user for an input and a random number between 0-10 for variation
-            //user validation for using only numbers
+        } else {
+            if (!hbi.isVisible()) {
+                hbi.setVisible(true);
+            }
+            if (hbi.getBpm() > 0) {
+                temp = hbi.getBpm();
+                BPM = temp;
+                System.out.println(BPM);
+            }
 
-            hbi.setVisible(true);
-            BPM = hbi.getBpm();
-            System.out.println(BPM);
         }
-
         return temp;
     }
 
     @Override
 
     public void run() {
-        for (int i = 0; i < 5; i++) {
-            BPM = getRandom();
-        }
+
+        BPM = getRandom();
+
     }
 }

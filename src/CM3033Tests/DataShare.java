@@ -99,7 +99,6 @@ public class DataShare {
     }
 
     public void runHb() {
-        hb.isAutomatic();
         hb.start();
     }
 }
