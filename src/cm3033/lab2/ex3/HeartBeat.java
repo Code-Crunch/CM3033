@@ -49,9 +49,7 @@ public class HeartBeat extends Thread {
     }
 
     public String genTime(int rand) throws InterruptedException {
-        start = Calendar.getInstance();
-        Date time = start.getTime();
-        String str = "BPM generated : " + rand + ", generated at :" + dateFormat.format(time);
+        String str = "BPM generated : " + rand + ", generated at :" + System.currentTimeMillis();
         return str;
     }
 

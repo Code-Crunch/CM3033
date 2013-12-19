@@ -290,18 +290,11 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_exitActionPerformed
 
     private void conectionsLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectionsLeftActionPerformed
-        if (hb.auto()) {
-            hb.isManual();
-        } else {
-            hb.isAutomatic();
-        }
         ActionListener actionlistener = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 while (hb.auto()) {
-                    now = Calendar.getInstance();
-                    Date time = now.getTime();
                     int place = hb.getRandom();
                     a.check(place);
                     if (a.alarm != null) {
@@ -318,7 +311,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
                 }
             }
         };
-        Timer t = new Timer(1000, actionlistener);
+        Timer t = new Timer(10000, actionlistener);
         t.start();
     }//GEN-LAST:event_conectionsLeftActionPerformed
 
@@ -411,12 +404,14 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     public void setConnection(boolean connected) {
         if (connected) {
+            hb.isAutomatic();
             connect = true;
             maxValue.setEnabled(false);
             minValue.setEnabled(false);
             opModeValue.setText("Remote");
             connectionButton.setText("Disconnect");
         } else {
+            hb.isManual();
             opModeValue.setText("Local");
             connectionButton.setText("Connect");
             connect = false;
