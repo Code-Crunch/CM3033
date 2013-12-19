@@ -19,7 +19,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     ////////////////////////////
     //////   VARIABLES   ///////
     ////////////////////////////
-    
     // variable to store the maxLimit and minLimit
     private int highValue, lowValue;
     // variables to store the oldMaxLimit and oldMinLimit
@@ -28,9 +27,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     // A calander to store the time of now and the time the application was started
     Calendar now = null, start = Calendar.getInstance();
-<<<<<<< HEAD
-
-    Test1 t1;
     Alarm a;
     HeartBeat hb;
     int heartbeatValue;
@@ -39,32 +35,21 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     //public volatile boolean connect;
     //public volatile boolean connected;
     //public volatile String maxMin = "";
-    public ClientApp(Test1 t2) throws IOException {
-=======
-    // Variable to store the Shared Data class
     DataShare dataShare;
-    
-    
     ////////////////////////////
     //////  CONSTRUCTOR  ///////
     ////////////////////////////
-    
+
     public ClientApp(DataShare ds2) throws IOException {
         // Initialise the components
->>>>>>> origin/master
         initComponents();
-        
+
         // set the data share to that passed to this class
         dataShare = ds2;
 
-<<<<<<< HEAD
         textSpace.setEditable(false);
 
-        t1 = t2;
-
-=======
         // Reset the max and min value dropdowns
->>>>>>> origin/master
         maxValue.removeAllItems();
         minValue.removeAllItems();
 
@@ -349,7 +334,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         testDropDowns("max");
     }//GEN-LAST:event_maxValueActionPerformed
 
-<<<<<<< HEAD
     private void sendBPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBPMActionPerformed
         try {
             a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
@@ -367,9 +351,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_sendBPMActionPerformed
 
-=======
     // A method to update the time
->>>>>>> origin/master
     public void updateTime() {
         // set the now calander
         now = Calendar.getInstance();
@@ -429,12 +411,10 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     // A method to the configure if the client is connected or not. 
     public void setConnection(boolean connected) {
         if (!connected) {
-<<<<<<< HEAD
+
             hb.isAutomatic();
             //connect = true;
-=======
             // If connected, disable the dropdowns
->>>>>>> origin/master
             maxValue.setEnabled(false);
             minValue.setEnabled(false);
             // Set the mode lable to remote
@@ -442,11 +422,10 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             // change the connect button to disconnect
             connectionButton.setText("Disconnect");
         } else {
-<<<<<<< HEAD
+
             hb.isManual();
-=======
-            // Set the mode label to local
->>>>>>> origin/master
+
+                   // Set the mode label to local
             opModeValue.setText("Local");
             // set the disconnect button to connect
             connectionButton.setText("Connect");
@@ -504,7 +483,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         // Update the time in near real time
         while (dataShare.isRunning()) {
             updateTime();
-            if (t1.isConnected()) {
+            if (dataShare.isConnected()) {
                 try {
                     alterText(hb.genTime(hb.getRandom()));
                 } catch (InterruptedException ex) {
