@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
  */
 //alarm class
 public class Alarm {
-//int to determine the high and low tresholds for the alarm
 
+    //int to determine the high and low tresholds for the alarm
     int low, high;
-//boolean to determin if its active and if it's too high or too low
+    //boolean to determin if its active and if it's too high or too low
     boolean isActive;
     boolean ishigh;
     //String that stores what the alarm was
@@ -31,8 +31,8 @@ public class Alarm {
     Calendar stop = null;
     //strings for logging the alarms start and stop time
     private String s, st;
-//constructor
 
+//constructor
     public Alarm(int low, int high) {
         isActive = false;
         ishigh = false;
@@ -40,30 +40,31 @@ public class Alarm {
         this.high = high;
         alarm = "";
     }
-//activate the alarm
 
+//activate the alarm
     public void activate() {
         start = Calendar.getInstance();
         Date time = start.getTime();
         st = dateFormat.format(time);
         isActive = true;
     }
-//deactivate alarm
 
+//deactivate alarm
     public void deactivate() {
         stop = Calendar.getInstance();
         Date time = stop.getTime();
         s = dateFormat.format(time);
         isActive = false;
     }
-//check if alarm is active
 
+//check if alarm is active
     public boolean active() {
         return isActive;
     }
-//check if the value is between the treshold
 
+//check if the value is between the treshold
     public void check(int bpm) {
+
         //check if it's to high
         if (bpm > high) {
             activate();
@@ -76,6 +77,7 @@ public class Alarm {
 
             deactivate();
         }
+
         //pop up's with the alarm
         if (active()
                 && ishigh) {
@@ -89,16 +91,16 @@ public class Alarm {
             alarm = "ALERT: TOO LOW, started at : " + st + ",stopped at :" + s;
         }
     }
-//check how long it has been since the last response
 
+//check how long it has been since the last response
     public void timeout(Calendar start, Calendar current) {
         if (start.compareTo(current) > 30000) {
             JOptionPane.showMessageDialog(null, "ALERT: NO RESPONSE FOR 30 SECONDS");
             alarm = "ALERT: NO RESPONSE FOR 30 SECONDS";
         }
     }
-//get the alarm string
 
+//get the alarm string
     public String info() {
         return alarm;
     }
@@ -112,6 +114,7 @@ public class Alarm {
         this.high = high;
     }
 
+//set the alarm text outside of the alarm
     public void setInfo(String s) {
         alarm = s;
     }
