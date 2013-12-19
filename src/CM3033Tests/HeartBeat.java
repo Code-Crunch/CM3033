@@ -11,19 +11,19 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 /**
  *
  * @author Florin Mazilu 1114040
  */
 public class HeartBeat extends Thread {
-//create a random for the BPM
 
+    //create a random for the BPM
     private Random r;
     //set a max value that the BPM can be 
-    private int max;
+    private int max, min;
     //returns the automatic bpm
     private int autoBPM;
-
     //boolean that decides if the bpm should be user inputted or automatic
     private boolean automatic = false;
     //gen date time for logging when a BPM is automaticly generated
@@ -31,20 +31,23 @@ public class HeartBeat extends Thread {
     private Calendar start = null;
 
     //constructor
-    public HeartBeat(int max) {
+    public HeartBeat(int max, int min) {
         r = new Random();
         this.max = max;
+        this.min = min;
     }
-//set automatic true
 
+    //set automatic true
     public void isAutomatic() {
         automatic = true;
     }
 
+    //returns whether the heartbeat is automatic or not 
     public boolean auto() {
         return automatic;
     }
 
+    //generates a time for the BPM
     public String genTime(int rand) throws InterruptedException {
         start = Calendar.getInstance();
         Date time = start.getTime();
@@ -52,16 +55,23 @@ public class HeartBeat extends Thread {
         return str;
     }
 
+    //set the automatic to false
     public void isManual() {
         automatic = false;
     }
-//generate a random integer between 0 and the max value
 
+    //set the max and min value for generating a random input
+    public void setMaxMin(int min, int max) {
+        this.min = min;
+        this.max = max;
+    }
+
+    //generate a random integer between 0 and the max value
     public int getRandom() {
         //generate a temp value for the random;
         int temp = 0;
         if (automatic) {
-            temp = r.nextInt(max - 20) + 20;
+            temp = r.nextInt(max - min) + min;
         } else {            //if the input is not automatic prompt the user for an input and a random number between 0-10 for variation
             //user validation for using only numbers
             boolean isValid = false;

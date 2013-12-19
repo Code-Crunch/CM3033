@@ -74,7 +74,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         minValue.addItem(180);
 
         a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
-        hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()));
+        hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
     }
 
     /**
@@ -321,6 +321,9 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             // Set the connection to that value
             setConnection(!dataShare.isConnect());
         }
+        a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
+        a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
+        hb.setMaxMin(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
 
     }//GEN-LAST:event_connectionButtonActionPerformed
 
@@ -338,6 +341,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         try {
             a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
             a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
+            hb.setMaxMin(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
             heartbeatValue = hb.getRandom();
             updateBpm(String.valueOf(heartbeatValue));
             alterText(hb.genTime(heartbeatValue));
@@ -425,7 +429,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
             hb.isManual();
 
-                   // Set the mode label to local
+            // Set the mode label to local
             opModeValue.setText("Local");
             // set the disconnect button to connect
             connectionButton.setText("Connect");
@@ -448,6 +452,25 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
 
     public int getHb() {
         return heartbeatValue;
+    }
+
+    public void updateLog() {
+        if (dataShare.isConnected()) {
+            try {
+                Thread.sleep(1000);
+                int placeHolder = hb.getRandom();
+                alterText(hb.genTime(placeHolder));
+                updateBpm(String.valueOf(placeHolder));
+                a.check(placeHolder);
+                if (a.info() != null) {
+                    alterText(a.info());
+                    a.setInfo(null);
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -483,14 +506,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         // Update the time in near real time
         while (dataShare.isRunning()) {
             updateTime();
-            if (dataShare.isConnected()) {
-                try {
-                    alterText(hb.genTime(hb.getRandom()));
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(ClientApp.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
+            updateLog();
         }
     }
 }
