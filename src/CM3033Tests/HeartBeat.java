@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CM3033Tests;
+package cm3033tests;
 
-import cm3033.lab2.ex3.*;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Florin Mazilu 1114040
  */
-public class HeartBeat {
+public class HeartBeat extends Thread {
 //create a random for the BPM
 
     private Random r;
@@ -43,19 +44,25 @@ public class HeartBeat {
         automatic = true;
     }
 
+    public boolean auto() {
+        return automatic;
+    }
+
     public String genTime(int rand) throws InterruptedException {
-        start = Calendar.getInstance();
-        Date time = start.getTime();
-        String str = "BPM generated : " + rand + ", generated at :" + dateFormat.format(time);
+        String str = "BPM generated : " + rand + ", generated at :" + System.currentTimeMillis();
         return str;
+    }
+
+    public void isManual() {
+        automatic = false;
     }
 //generate a random integer between 0 and the max value
 
-    public int getRandom() throws InterruptedException {
+    public int getRandom() {
         //generate a temp value for the random;
         int temp = 0;
         if (automatic) {
-            temp = r.nextInt(max);
+            temp = r.nextInt(max - 20) + 20;
         } else {            //if the input is not automatic prompt the user for an input and a random number between 0-10 for variation
             //user validation for using only numbers
             boolean isValid = false;
@@ -83,5 +90,4 @@ public class HeartBeat {
         }
         return temp;
     }
-
 }

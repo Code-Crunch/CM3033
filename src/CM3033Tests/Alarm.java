@@ -5,7 +5,6 @@
  */
 package CM3033Tests;
 
-import cm3033.lab2.ex3.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +24,7 @@ public class Alarm {
     boolean isActive;
     boolean ishigh;
     //String that stores what the alarm was
-    String alarm;
+    private String alarm;
     //for logging when an alarm is started and stopped
     final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     Calendar start = Calendar.getInstance();
@@ -107,6 +106,9 @@ public class Alarm {
 
     public void setHigh(int high) {
         this.high = high;
+    }
+    public void setInfo(String s){
+    alarm = s;
     }
 
 }
