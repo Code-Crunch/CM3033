@@ -80,12 +80,12 @@ public class Alarm {
                 && ishigh) {
             JOptionPane.showMessageDialog(null, "ALERT: HEART BEAT TOO HIGH");
             deactivate();
-            alarm = "ALERT: HEART BEAT TOO HIGH, started at : " + st + ",stopped at :" + s;
+            alarm = "ALERT: TOO HIGH, started at : " + st + ",stopped at :" + s;
         } else if (active()
                 && !ishigh) {
             JOptionPane.showMessageDialog(null, "ALERT: HEART BEAT TOO LOW");
             deactivate();
-            alarm = "ALERT: HEART BEAT TOO LOW, started at : " + st + ",stopped at :" + s;
+            alarm = "ALERT: TOO LOW, started at : " + st + ",stopped at :" + s;
         }
     }
 //check how long it has been since the last response
