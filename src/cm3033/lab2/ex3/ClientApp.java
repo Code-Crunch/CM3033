@@ -311,7 +311,8 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
                 }
             }
         };
-        Timer t = new Timer(10000, actionlistener);
+        Timer t = new Timer(1000, actionlistener);
+        t.setDelay(10000);
         t.start();
     }//GEN-LAST:event_conectionsLeftActionPerformed
 
