@@ -357,6 +357,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
             a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
             dataShare.setHbLimits(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
+            dataShare.runHb();
             heartbeatValue = dataShare.getHb();
             updateBpm(String.valueOf(heartbeatValue));
             alterText(dataShare.genTime());
@@ -538,7 +539,7 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         // Update the time in near real time
         while (dataShare.isRunning()) {
             updateTime();
-            updateLog();
+            //  updateLog();
         }
     }
 }

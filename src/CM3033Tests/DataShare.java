@@ -96,8 +96,9 @@ public class DataShare {
     }
 
     public void runHb() {
-        for (int i = 0; i < 10; i++) {
-            hb.run();
+        if (hb.isAlive()) {
+        } else {
+            hb.start();
         }
     }
 }

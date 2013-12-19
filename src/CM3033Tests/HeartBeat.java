@@ -11,12 +11,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Florin Mazilu 1114040
  */
-public class HeartBeat implements Runnable {
+public class HeartBeat extends Thread {
 
     //create a random for the BPM
     private Random r;
@@ -109,8 +111,6 @@ public class HeartBeat implements Runnable {
     @Override
 
     public void run() {
-
         BPM = getRandom();
-
     }
 }
