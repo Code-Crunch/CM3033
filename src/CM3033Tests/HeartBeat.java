@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cm3033tests;
+package cm3033Tests;
 
 import java.util.Random;
 import javax.swing.JOptionPane;
