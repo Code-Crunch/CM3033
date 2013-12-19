@@ -16,12 +16,14 @@ import java.util.Date;
  *
  * @author Florin Mazilu 1114040
  */
-public class HeartBeat extends Thread {
+public class HeartBeat implements Runnable {
 
     //create a random for the BPM
     private Random r;
     //set a max value that the BPM can be 
     private int max, min;
+
+    private int BPM;
     //boolean that decides if the bpm should be user inputted or automatic
     private boolean automatic = false;
     //gen date time for logging when a BPM is automaticly generated
@@ -29,7 +31,7 @@ public class HeartBeat extends Thread {
     private Calendar start = null;
 
     //constructor
-    public HeartBeat(int max, int min) {
+    public HeartBeat(int min, int max) {
         r = new Random();
         this.max = max;
         this.min = min;
@@ -43,6 +45,10 @@ public class HeartBeat extends Thread {
     //returns whether the heartbeat is automatic or not 
     public boolean auto() {
         return automatic;
+    }
+
+    public int getCurrentBPM() {
+        return BPM;
     }
 
     //generates a time for the BPM
@@ -70,6 +76,7 @@ public class HeartBeat extends Thread {
         int temp = 0;
         if (automatic) {
             temp = r.nextInt(max - min) + min;
+            BPM = temp;
         } else {            //if the input is not automatic prompt the user for an input and a random number between 0-10 for variation
             //user validation for using only numbers
             boolean isValid = false;
@@ -78,10 +85,11 @@ public class HeartBeat extends Thread {
             String check2 = "[0-9]{0,9}";
             String check3 = "[0-9]{0,9}[0-9]";
             while (!isValid) {
-                String str = JOptionPane.showInputDialog("Insert Next Heart Beat value(only numbers between 1-300)");
+                String str = JOptionPane.showInputDialog("Insert Next Heart Beat value(only numbers between 1-200)");
                 if (str != null) {
                     if (str.matches(check1) || str.matches(check2) || str.matches(check3)) {
                         temp = Integer.parseInt(str) + r.nextInt(10);
+                        BPM = temp;
                         //check for the values to be between 0-300 as there will never be a bpm that high
                         if (temp > 0 && temp <= 200) {
                             isValid = true;
@@ -96,5 +104,13 @@ public class HeartBeat extends Thread {
             }
         }
         return temp;
+    }
+
+    @Override
+
+    public void run() {
+
+        BPM = getRandom();
+
     }
 }

@@ -28,7 +28,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     // A calander to store the time of now and the time the application was started
     Calendar now = null, start = Calendar.getInstance();
     Alarm a;
-    HeartBeat hb;
     int heartbeatValue;
     int delay;
 
@@ -75,7 +74,9 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         minValue.addItem(180);
 
         a = new Alarm(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
-        hb = new HeartBeat(Integer.parseInt(maxValue.getSelectedItem().toString()), Integer.parseInt(minValue.getSelectedItem().toString()));
+        dataShare.setMax(Integer.parseInt(maxValue.getSelectedItem().toString()));
+        dataShare.setMin(Integer.parseInt(minValue.getSelectedItem().toString()));
+        dataShare.startHb();
         delay = 10000;
     }
 
@@ -337,8 +338,8 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         }
         a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
         a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
-        hb.setMaxMin(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
-
+        dataShare.setHbLimits(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
+        dataShare.runHb();
     }//GEN-LAST:event_connectionButtonActionPerformed
 
     private void minValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minValueActionPerformed
@@ -355,10 +356,10 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         try {
             a.setHigh(Integer.parseInt(maxValue.getSelectedItem().toString()));
             a.setLow(Integer.parseInt(minValue.getSelectedItem().toString()));
-            hb.setMaxMin(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
-            heartbeatValue = hb.getRandom();
+            dataShare.setHbLimits(Integer.parseInt(minValue.getSelectedItem().toString()), Integer.parseInt(maxValue.getSelectedItem().toString()));
+            heartbeatValue = dataShare.getHb();
             updateBpm(String.valueOf(heartbeatValue));
-            alterText(hb.genTime(heartbeatValue));
+            alterText(dataShare.genTime());
             a.check(heartbeatValue);
             if (a.info() != null) {
                 alterText(a.info());
@@ -448,8 +449,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
     // A method to the configure if the client is connected or not. 
     public void setConnection(boolean connected) {
         if (!connected) {
-
-            hb.isAutomatic();
             //connect = true;
             // If connected, disable the dropdowns
             maxValue.setEnabled(false);
@@ -459,9 +458,6 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
             // change the connect button to disconnect
             connectionButton.setText("Disconnect");
         } else {
-
-            hb.isManual();
-
             // Set the mode label to local
             opModeValue.setText("Local");
             // set the disconnect button to connect
@@ -491,8 +487,8 @@ public class ClientApp extends javax.swing.JFrame implements Runnable {
         if (dataShare.isConnected()) {
             try {
                 Thread.sleep(delay);
-                int placeHolder = hb.getRandom();
-                alterText(hb.genTime(placeHolder));
+                int placeHolder = dataShare.getHb();
+                alterText(dataShare.genTime());
                 updateBpm(String.valueOf(placeHolder));
                 a.check(placeHolder);
                 if (a.info() != null) {

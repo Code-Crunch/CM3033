@@ -14,6 +14,8 @@ public class DataShare {
     ////////////////////////////
     //////   VARIABLES   ///////
     ////////////////////////////
+    //integer for min and max 
+    int min, max;
     // Store wether to connect or not
     public static volatile boolean connect = false;
     // Store if connected or not
@@ -23,11 +25,26 @@ public class DataShare {
     // Store the max/min limits
     public static volatile String maxMin = "";
     // BPM
+    HeartBeat hb;
+    int BPM;
 
     ////////////////////////////
     //////  CONSTRUCTOR  ///////
     ////////////////////////////
     public DataShare() {
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public void startHb() {
+        hb = new HeartBeat(min, max);
+
     }
 
     //////////////////////////////
@@ -65,4 +82,22 @@ public class DataShare {
         DataShare.maxMin = maxMin;
     }
 
+    public void setHbLimits(int min, int max) {
+        hb.setMaxMin(min, max);
+    }
+
+    public int getHb() {
+        BPM = hb.getCurrentBPM();
+        return BPM;
+    }
+
+    public String genTime() throws InterruptedException {
+        return hb.genTime(BPM);
+    }
+
+    public void runHb() {
+        for (int i = 0; i < 10; i++) {
+            hb.run();
+        }
+    }
 }
